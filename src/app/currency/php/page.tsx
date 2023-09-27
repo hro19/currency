@@ -1,6 +1,7 @@
 import React from "react";
 import { Currency, CurrencyObj } from "@/ts/Currency";
 import { GetApiCurencyPhp } from "@/api/currency/getApiCurrencyPhp";
+import { dateUntilFun } from "@/utils/dateFns"; 
 import {
   Box,
   Center,
@@ -52,7 +53,7 @@ const UsersList = async () => {
                     <Td>{currencyInfo.name}</Td>
                     <Td>{currencyInfo.rate}</Td>
                     <Td>{currencyInfo.inverseRate}</Td>
-                    <Td>{currencyInfo.date}</Td>
+                    <Td>{dateUntilFun(currencyInfo.date)}</Td>
                   </Tr>
                 )
               )}
