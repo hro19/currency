@@ -23,6 +23,7 @@ const SelectNational = () => {
             variant="filled"
             placeholder="選択してください"
             bg="#FC8181"
+            value={currentNational}
             onChange={(event) => setCurrentNational(event.target.value as National)}
           >
             {NATIONAL.map((national) => (
