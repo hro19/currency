@@ -2,7 +2,8 @@
 
 import React,{useState} from 'react';
 import { Currency, CurrencyObj } from "@/ts/Currency";
-import { dateUntilFun } from "@/utils/dateFns"; 
+import { dateUntilFun } from "@/utils/dateFns";
+import { useNational } from "@/zustand/national";
 import {
   Box,
   Center,
@@ -24,9 +25,11 @@ import {
 
 const CurrencyDataTable = ({ currencyData }: { currencyData: CurrencyObj }) => {
     const [currentCurrencyData, setCurrentCurrencyData] =
-      useState<CurrencyObj>(currencyData);
+        useState<CurrencyObj>(currencyData);
+    const { currentNational, setCurrentNational } = useNational();
   return (
     <>
+      <Center bgColor="green.500" color="white" p="4">{currentNational}</Center>
       <TableContainer maxWidth="90%" mx="auto">
         <Table size="sm" variant="striped" colorScheme="orange">
           <TableCaption>Free JSON Currency Exchange Rate Feeds</TableCaption>

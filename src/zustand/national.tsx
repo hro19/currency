@@ -1,4 +1,16 @@
+import create from "zustand";
 import { National } from "@/ts/Currency";
+
+type useNationalType = {
+  currentNational: National;
+  setCurrentNational: (national: National) => void;
+};
+
+export const useNational = create<useNationalType>((set) => ({
+  currentNational: "jpy",
+  setCurrentNational: (national) => set((state) => ({ currentNational: national })),
+}));
+
 
 export const NATIONAL: National[] = [
   "aud",
@@ -11,6 +23,7 @@ export const NATIONAL: National[] = [
   "php",
   "usd",
 ];
+
 export const NATIONAL_i18n = {
   aud: {
     name: {
