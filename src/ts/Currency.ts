@@ -17,3 +17,5 @@ export type CurrencyObj = {
 // jp_nameがJapanese Yen → 円　　　jp_nameがu.s Dollar → ドル
 type CurrencyJaUnion = "jp_code" | "jp_name";  
 export type CurrencyAddJa = Currency & Record<CurrencyJaUnion, string>;
+
+export type National = "aud" | "cny" | "krw" | "thb" | "twd" | "vnd" | "jpy" | "php" | "usd";

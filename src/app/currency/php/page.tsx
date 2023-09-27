@@ -1,12 +1,14 @@
 import React from "react";
 import { Currency, CurrencyObj } from "@/ts/Currency";
-import { GetApiCurencyPhp } from "@/api/currency/getApiCurrencyPhp";
+import { GetApiCurency } from "@/api/currency/getApiCurrency";
 import { dateUntilFun } from "@/utils/dateFns"; 
+import SelectNational from "./SelectNational";
 import {
   Box,
   Center,
   Button,
   Heading,
+  Text,
   Table,
   Thead,
   Tbody,
@@ -16,22 +18,15 @@ import {
   Td,
   TableCaption,
   TableContainer,
+  Stack,
+  Select,
 } from "@chakra-ui/react";
 
-const getCurency = GetApiCurencyPhp;
-
-const UsersList = async () => {
-  const phpCur: Awaited<Promise<CurrencyObj>> = await getCurency();
+const Page = async () => {
+  const phpCur: Awaited<Awaited<CurrencyObj>> = await GetApiCurency("php");
   return (
     <div>
-      <Box>
-        <Center bgColor="orange.500" color="white" p="4" mb="40px">
-          <Heading as="h1" size="xl" noOfLines={1}>
-            フィリピンから見た通貨一覧
-          </Heading>
-        </Center>
-      </Box>
-
+      <SelectNational />
       <TableContainer maxWidth="90%" mx="auto">
         <Table size="sm" variant="striped" colorScheme="orange">
           <TableCaption>Free JSON Currency Exchange Rate Feeds</TableCaption>
@@ -64,4 +59,4 @@ const UsersList = async () => {
   );
 };
 
-export default UsersList;
+export default Page;
