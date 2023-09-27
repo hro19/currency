@@ -1,13 +1,12 @@
 "use client"
 
-import React,{useState} from "react";
+import React from "react";
 import { NATIONAL, NATIONAL_i18n } from "@/zustand/national";
-import { Box, Center, Button, Heading, Stack, Select } from "@chakra-ui/react";
+import { Box, Center, Heading, Stack, Select } from "@chakra-ui/react";
 import { National } from "@/ts/Currency";
 import { useNational } from "@/zustand/national";
 
 const SelectNational = () => {
-  // const [currentNational, setCurrentNational] = useState<National>("jpy");
   const { currentNational, setCurrentNational } = useNational();
   
   return (
