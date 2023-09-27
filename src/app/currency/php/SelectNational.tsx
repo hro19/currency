@@ -28,7 +28,9 @@ const SelectNational = () => {
             onChange={(event) => setCurrentNational(event.target.value as National)}
           >
             {NATIONAL.map((national) => (
-              <option value={national}>{NATIONAL_i18n[national].name.ja}</option>
+              <option key={national} value={national}>
+                {NATIONAL_i18n[national].name.ja}
+              </option>
             ))}
           </Select>
         </Box>
