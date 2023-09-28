@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react";
-import { NATIONAL, NATIONAL_i18n } from "@/zustand/national";
+import { NATIONALexceptJap, NATIONAL_i18n } from "@/zustand/national";
 import { Box, Heading, Stack, Select } from "@chakra-ui/react";
 import { National } from "@/ts/Currency";
 import { useNational } from "@/zustand/national";
@@ -20,7 +20,7 @@ const SelectNational = () => {
             value={currentNational}
             onChange={(event) => setCurrentNational(event.target.value as National)}
           >
-            {NATIONAL.map((national) => (
+            {NATIONALexceptJap.map((national) => (
               <option key={national} value={national}>
                 {NATIONAL_i18n[national].name.ja}
               </option>

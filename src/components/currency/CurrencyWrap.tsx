@@ -1,21 +1,24 @@
-// "use client";
+"use client";
 
 import React, { useEffect,useState } from "react";
 import { Currency, CurrencyObj } from "@/ts/Currency";
 import Image from "next/image";
 import { dateUntilFun } from "@/utils/dateFns";
 import { NATIONAL_i18n } from "@/zustand/national";
+import { useNational } from "@/zustand/national";
 
 const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
   // console.log(currencyObjData);
   // console.log(currencyObjData["php"]);
+ const { currentNational, setCurrentNational } = useNational();
+
   return (
     <>
       <div className="flex">
         <div className="relative w-full bg-cyan-100 px-4 py-12">
           <i className="absolute top-3 left-2">
             <Image
-              src="/country/php.png"
+              src={`/country/${currentNational}.png`}
               alt="交換元通貨のフラグ"
               width={80}
               height={55}
@@ -24,13 +27,15 @@ const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => 
           </i>
           <section className="text-center">
             <h3 className="text-lg font-bold">
-              {NATIONAL_i18n["php"].name.ja}のレート
+              {NATIONAL_i18n[currentNational].name.ja}のレート
               <br />
-              {currencyObjData["php"].inverseRate.toFixed(5).toString()}円
-              <span className="text-sm">(/{NATIONAL_i18n["php"].currencyName.ja})</span>
+              {currencyObjData[currentNational].inverseRate.toFixed(5).toString()}円
+              <span className="text-sm">
+                (/{NATIONAL_i18n[currentNational].currencyName.ja})
+              </span>
             </h3>
             <span className="text-xs block">
-              更新日（{dateUntilFun(currencyObjData["php"].date)}）
+              更新日（{dateUntilFun(currencyObjData[currentNational].date)}）
             </span>
 
             <input
