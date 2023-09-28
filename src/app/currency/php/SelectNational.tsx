@@ -2,7 +2,7 @@
 
 import React from "react";
 import { NATIONAL, NATIONAL_i18n } from "@/zustand/national";
-import { Box, Center, Heading, Stack, Select } from "@chakra-ui/react";
+import { Box, Heading, Stack, Select } from "@chakra-ui/react";
 import { National } from "@/ts/Currency";
 import { useNational } from "@/zustand/national";
 
@@ -11,13 +11,6 @@ const SelectNational = () => {
   
   return (
     <>
-      <Box>
-        <Center bgColor="orange.500" color="white" p="4">
-          <Heading as="h1" size="xl" noOfLines={1}>
-            各国の通貨一覧
-          </Heading>
-        </Center>
-      </Box>
       <Stack spacing={8} p={5} direction="row" mb="8" mx="auto" width="80%">
         <Box>
           <Select

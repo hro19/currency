@@ -1,11 +1,14 @@
-"use client";
+// "use client";
 
 import React, { useEffect,useState } from "react";
 import { Currency, CurrencyObj } from "@/ts/Currency";
 import Image from "next/image";
+import { dateUntilFun } from "@/utils/dateFns";
+import { NATIONAL_i18n } from "@/zustand/national";
 
-const CurrencyWrap = () => {
-
+const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
+  // console.log(currencyObjData);
+  // console.log(currencyObjData["php"]);
   return (
     <>
       <div className="flex">
@@ -21,11 +24,14 @@ const CurrencyWrap = () => {
           </i>
           <section className="text-center">
             <h3 className="text-lg font-bold">
-              {"phpCurrency.getCurrencyJaName()"}のレート
+              {NATIONAL_i18n["php"].name.ja}のレート
               <br />
-              {"phpCurrency.inverseRate.toString()"}
+              {currencyObjData["php"].inverseRate.toFixed(5).toString()}円
+              <span className="text-sm">(/{NATIONAL_i18n["php"].currencyName.ja})</span>
             </h3>
-            <span className="text-xs block">更新日（{"phpCurrency.getDateFun()"}）</span>
+            <span className="text-xs block">
+              更新日（{dateUntilFun(currencyObjData["php"].date)}）
+            </span>
 
             <input
               type="text"
@@ -55,7 +61,7 @@ const CurrencyWrap = () => {
           <section className="grid place-content-center place-items-center h-full">
             <h3 className="mb-3">両替時の日本円</h3>
             <p className="text-4xl">
-              {'Math.floor(432300).toLocaleString("ja-JP")'}
+              {Math.floor(432300).toLocaleString("ja-JP")}
               <span className="text-sm">円</span>
             </p>
           </section>
@@ -87,7 +93,6 @@ const CurrencyWrap = () => {
               <td className="border px-4 py-2">$75.50</td>
               <td className="border px-4 py-2">¥9,000.00</td>
             </tr>
-            {/* Add more rows as needed */}
           </tbody>
         </table>
       </div>

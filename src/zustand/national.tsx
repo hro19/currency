@@ -78,7 +78,7 @@ export const NATIONAL_i18n = {
       ja: "日本",
     },
     currencyName: {
-      ja: "円",
+      ja: "日本円",
     },
   },
   php: {
@@ -86,7 +86,7 @@ export const NATIONAL_i18n = {
       ja: "フィリピン",
     },
     currencyName: {
-      ja: "ペソ",
+      ja: "フィリピンペソ",
     },
   },
   usd: {

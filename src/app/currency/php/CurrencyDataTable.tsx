@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Currency, CurrencyObj } from "@/ts/Currency";
 import { dateUntilFun } from "@/utils/dateFns";
 import { GetApiCurency } from "@/api/currency/getApiCurrency";
-import { useNational } from "@/zustand/national";
+import { useNational, NATIONAL_i18n } from "@/zustand/national";
 import {
   Box,
   Center,
@@ -44,8 +44,8 @@ const CurrencyDataTable = ({ currencyData }: { currencyData: CurrencyObj }) => {
 
   return (
     <>
-      <Center bgColor="green.500" color="white" p="4" mb="12">
-        {currentNational}
+      <Center fontSize={"2xl"} bgColor="green.500" color="white" p="4" mb="12">
+        {NATIONAL_i18n[currentNational].currencyName.ja}
       </Center>
       <TableContainer maxWidth="90%" mx="auto">
         <Table size="sm" variant="striped" colorScheme="orange">
