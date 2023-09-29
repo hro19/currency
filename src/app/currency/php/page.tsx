@@ -3,23 +3,18 @@ import { Currency, CurrencyObj } from "@/ts/Currency";
 import { GetApiCurency } from "@/api/currency/getApiCurrency";
 import SelectNational from "./SelectNational";
 import CurrencyDataTable from "./CurrencyDataTable";
-import { Box, Center, Heading } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
+import HeaderTitle from "@/components/common/HeaderTitle";
 
 
 const Page = async () => {
   const currencyData: Awaited<Awaited<CurrencyObj>> = await GetApiCurency();
   return (
-    <div>
-      <Box>
-        <Center bgColor="orange.500" color="white" p="4">
-          <Heading as="h1" size="xl" noOfLines={1}>
-            各国の通貨一覧
-          </Heading>
-        </Center>
-      </Box>
+    <Box>
+      <HeaderTitle title="各国の通貨一覧" />
       <SelectNational />
       <CurrencyDataTable currencyData={currencyData} />
-    </div>
+    </Box>
   );
 };
 

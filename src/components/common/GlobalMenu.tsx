@@ -12,6 +12,7 @@ import {
   MenuOptionGroup,
   MenuDivider,
   Button,
+  Text
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 
@@ -31,13 +32,19 @@ const GlobalMenu = () => {
               </MenuButton>
               <MenuList className="bg-stone-500 p-3 rounded-xl text-white">
                 <MenuItem>
-                  <Link href="/">トップ</Link>
+                  <Link href="/" className="w-full">
+                    <Text>トップ</Text>
+                  </Link>
                 </MenuItem>
                 <MenuItem>
-                  <Link href="/currency/php">通貨テーブル</Link>
+                  <Link href="/currency/php" className="w-full">
+                    通貨テーブル
+                  </Link>
                 </MenuItem>
                 <MenuItem>
-                  <Link href="/currency/jpy">通貨電卓</Link>
+                  <Link href="/currency/jpy" className="w-full">
+                    通貨電卓
+                  </Link>
                 </MenuItem>
               </MenuList>
             </>

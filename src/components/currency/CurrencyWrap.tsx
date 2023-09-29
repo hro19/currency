@@ -6,6 +6,7 @@ import Image from "next/image";
 import { dateUntilFun } from "@/utils/dateFns";
 import { NATIONAL_i18n } from "@/zustand/national";
 import { useNational } from "@/zustand/national";
+import { Flex,Box } from "@chakra-ui/react";
 
 const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
   // console.log(currencyObjData);
@@ -14,8 +15,8 @@ const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => 
 
   return (
     <>
-      <div className="flex">
-        <div className="relative w-full bg-cyan-100 px-4 py-12">
+      <Flex>
+        <Box bg={"cyan.100"} px={4} py={12} w={"100%"} className="relative">
           <i className="absolute top-3 left-2">
             <Image
               src={`/country/${currentNational}.png`}
@@ -51,8 +52,8 @@ const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => 
               className="my-4 text-2xl border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </section>
-        </div>
-        <div className="relative w-full bg-fuchsia-100 px-4 py-12">
+        </Box>
+        <Box bg={"green.200"} px={4} py={12} w={"100%"} className="relative">
           <i className="absolute top-3 left-2">
             <Image
               src="/country/jpy.png"
@@ -70,8 +71,8 @@ const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => 
               <span className="text-sm">円</span>
             </p>
           </section>
-        </div>
-      </div>
+        </Box>
+      </Flex>
       <div className="flex justify-center mt-10 mx-auto">
         <table className="table-auto border-collapse border border-gray-300">
           <thead>
