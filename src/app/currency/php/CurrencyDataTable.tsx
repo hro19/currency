@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Currency, CurrencyObj } from "@/ts/Currency";
-import { dateUntilFun } from "@/utils/dateFns";
+import { dateFormatter } from "@/utils/dateFns";
 import { GetApiCurency } from "@/api/currency/getApiCurrency";
 import { useNational, NATIONAL_i18n } from "@/zustand/national";
 import {
@@ -68,7 +68,7 @@ const CurrencyDataTable = ({ currencyData }: { currencyData: CurrencyObj }) => {
                     <Td>{currencyInfo.name}</Td>
                     <Td>{currencyInfo.rate}</Td>
                     <Td>{currencyInfo.inverseRate}</Td>
-                    <Td>{dateUntilFun(currencyInfo.date)}</Td>
+                    <Td>{dateFormatter.fun(currencyInfo.date)}</Td>
                   </Tr>
                 )
               )}

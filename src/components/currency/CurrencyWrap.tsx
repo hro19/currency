@@ -3,7 +3,7 @@
 import React, { useEffect,useState } from "react";
 import { Currency, CurrencyObj } from "@/ts/Currency";
 import Image from "next/image";
-import { dateUntilFun } from "@/utils/dateFns";
+import { dateFormatter } from "@/utils/dateFns";
 import { NATIONAL_i18n } from "@/zustand/national";
 import { useNational } from "@/zustand/national";
 import { Flex,Box } from "@chakra-ui/react";
@@ -36,7 +36,7 @@ const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => 
               </span>
             </h3>
             <span className="text-xs block">
-              更新日（{dateUntilFun(currencyObjData[currentNational].date)}）
+              更新日（{dateFormatter.zi(currencyObjData[currentNational].date)}）
             </span>
 
             <input
