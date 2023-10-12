@@ -88,14 +88,14 @@ const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => 
             <tr>
               <td className="border px-4 py-2">Product A</td>
               <td className="border px-4 py-2">USD</td>
-              <td className="border px-4 py-2">2023-08-25 12:00:00</td>
+              <td className="border px-4 py-2">2023-08-25 12時</td>
               <td className="border px-4 py-2">$100.00</td>
               <td className="border px-4 py-2">¥11,000.00</td>
             </tr>
             <tr>
               <td className="border px-4 py-2">Product B</td>
               <td className="border px-4 py-2">EUR</td>
-              <td className="border px-4 py-2">2023-08-25 13:30:00</td>
+              <td className="border px-4 py-2">2023-08-25 13時</td>
               <td className="border px-4 py-2">$75.50</td>
               <td className="border px-4 py-2">¥9,000.00</td>
             </tr>
