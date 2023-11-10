@@ -29,7 +29,7 @@ const ItemWrap = ({ items}:any) => {
                 <AccordionPanel>
                   <Box>
                   {item.histories && item.histories.map((history: any) => (
-                    <Box className="space-y-1">
+                    <Box key={history.id} className="space-y-1">
                         <Heading as={"h3"} className="text-lg font-semibold">{history.price}</Heading>
                         <Text className="text-xs text-gray-400">{dateFormatter.fun(history.created_at)}</Text>
                     </Box>
