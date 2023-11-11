@@ -1,15 +1,14 @@
-"use client";
 
-import React from 'react'
+
+import React, { useState, useEffect } from 'react';
 import { Flex,Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon,
     Box, Center , Heading, Text, Button, ButtonGroup, Spacer } from '@chakra-ui/react';
 import {dateFormatter} from "@/utils/dateFns";
 import Image from 'next/image';
 
-const ItemWrap = ({ items}:any) => {
+const ItemWrap = ({ item}:any) => {
   return (
     <>
-              {items.map((item: any) => (
             <Box key={item.id} className="relative p-4 border rounded shadow">
             <Box as={"i"} className="absolute -top-3 -right-3"><Image src={`/country/${item.currencyCode}.png`} alt={item.currencyCode} width={40} height={40} /></Box>
             
@@ -39,7 +38,7 @@ const ItemWrap = ({ items}:any) => {
                   </AccordionButton>
                 </Heading>
                 <AccordionPanel>
-                  <Box>
+                  <div>
                   {item.histories && item.histories.map((history: any) => (
                     <Box key={history.id} className="space-y-1">
                     <Flex align="center" gap={2}>
@@ -52,12 +51,11 @@ const ItemWrap = ({ items}:any) => {
                     </Flex>
                     </Box>
                     ))}
-                  </Box>
+                  </div>
                 </AccordionPanel>
               </AccordionItem>
             </Accordion>
             </Box>
-        ))}
     </>
   )
 }
