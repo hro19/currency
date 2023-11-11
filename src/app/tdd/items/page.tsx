@@ -14,7 +14,7 @@ import { Box, Container, Heading } from '@chakra-ui/react';
         <Heading as={"h1"} className="text-2xl text-blue-500 font-bold my-4 ml-2">テスト開発【item】</Heading>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {data.map((item: any) => (
-        <ItemCard item={item} />
+        <ItemCard item={item} key={item.id} />
         ))}
       </div>
         </Container>
