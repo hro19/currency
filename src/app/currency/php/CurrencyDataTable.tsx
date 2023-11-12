@@ -50,13 +50,23 @@ const CurrencyDataTable = ({ currencyData }: { currencyData: CurrencyObj }) => {
       <TableContainer maxWidth="90%" mx="auto">
         <Table size="sm" variant="striped" colorScheme="orange">
           <TableCaption>Free JSON Currency Exchange Rate Feeds</TableCaption>
-          <Thead>
+          <Thead className="bg-gray-200 text-gray-700 py-4">
             <Tr>
-              <Th>国</Th>
-              <Th>国情報</Th>
-              <Th>レート率</Th>
-              <Th>インバートレート率</Th>
-              <Th>更新日時</Th>
+              <Th fontSize="xl" lineHeight="tall">
+                国
+              </Th>
+              <Th fontSize="xl" lineHeight="tall">
+                国情報
+              </Th>
+              <Th fontSize="xl" lineHeight="tall">
+                レート率
+              </Th>
+              <Th fontSize="xl" lineHeight="tall">
+                インバートレート率
+              </Th>
+              <Th fontSize="xl" lineHeight="tall">
+                更新日時
+              </Th>
             </Tr>
           </Thead>
           <Tbody>
