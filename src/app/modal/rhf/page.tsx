@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { chakra,Button,Input,FormControl, FormLabel,Stack,Box } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { fetchItems } from "@/api/item/fetchItem";
 
@@ -16,19 +17,31 @@ const Page = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label>
-        Price:
-        <input {...register("price", { required: true})} />
-      </label>
-      <br />
-      <label>
-        Item ID:
-        <input {...register("itemId", { required: true})} />
-      </label>
-      <br />
-      <button type="submit">Submit</button>
-    </form>
+    <Box mt={8} mx={6}>
+      <chakra.form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-4">
+        <Stack spacing={8}>
+          <FormControl display="block">
+            <FormLabel>Price:</FormLabel>
+            <Input {...register("price", { required: true })} />
+          </FormControl>
+
+          <FormControl display="block">
+            <FormLabel>Item ID:</FormLabel>
+            <Input {...register("itemId", { required: true })} />
+          </FormControl>
+        </Stack>
+        <Button
+          bg="white"
+          border="1px"
+          borderColor="blue.500"
+          _hover={{ bg: "blue.100" }}
+          fontSize="lg"
+          type="submit"
+        >
+          Submit
+        </Button>
+      </chakra.form>
+    </Box>
   );
 };
 
