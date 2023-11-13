@@ -43,5 +43,15 @@ export const fetchItems = {
     );
     const data = await response.json();
     return data;
+  },
+  deliteItemHistory: async (itemHistoryId: number) => {
+    const response = await fetch(
+      `https://currency-postgres.vercel.app/api/v1/itemhistory/${itemHistoryId}`,
+      {
+        method: "DELETE",
+      }
+    )
+    const data = await response.json();
+    return data;
   }
 };

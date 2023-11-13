@@ -6,7 +6,6 @@ import { Item } from '@/ts/Item';
 
   export default async function Page() {
     const data = await fetchItems.getAll()
-    console.log(data);
     
     return (
       <Box>

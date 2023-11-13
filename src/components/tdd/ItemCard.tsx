@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import {
   Flex,
@@ -18,6 +20,7 @@ import { dateFormatter } from "@/utils/dateFns";
 import Image from "next/image";
 import AddItemHistoryButton from "@/components/item/AddItemHistoryButton";
 import EditItemButton from "@/components/item/EditItemButton";
+import { fetchItems } from "@/api/item/fetchItem";
 
 const ItemWrap = ({ item }: any) => {
   return (
@@ -28,7 +31,7 @@ const ItemWrap = ({ item }: any) => {
             src={`/country/${item.currencyCode}.png`}
             alt={item.currencyCode}
             width={40}
-            height={40}
+            height={30}
           />
         </Box>
 
@@ -92,6 +95,17 @@ const ItemWrap = ({ item }: any) => {
                             (レート:2.66)
                           </Text>
                         </Text>
+                        <Button
+                          size="xs"
+                          color={"pink.500"}
+                          bg="white"
+                          border="1px"
+                          borderColor="pink.500"
+                          fontSize={"xs"}
+                          onClick={() => fetchItems.deliteItemHistory(history.id)}
+                        >
+                          削除
+                        </Button>
                       </Flex>
                     </Box>
                   ))}
