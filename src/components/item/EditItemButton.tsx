@@ -17,17 +17,17 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import {fetchItems} from "@/api/item/fetchItem";
+import { fetchItems } from "@/api/item/fetchItem";
 import { Item } from "@/ts/Item";
 
-const page = () => {
+const EditItemButton = ({ item }: { item:Item }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { register, handleSubmit, reset } = useForm<
     Omit<Item, "updated_at" | "created_at" | "id">
   >({
     defaultValues: {
-      name: "そうめん2",
-      currencyCode: "php",
+      name: item.name,
+      currencyCode: item.currencyCode,
     } as unknown as Omit<Item, "updated_at" | "created_at" | "id">,
   });
   const toast = useToast();
@@ -40,9 +40,9 @@ const page = () => {
     setIsOpen(false);
   };
 
-  const onSubmit = async (data: Omit<Item, "updated_at" | "created_at" | "id">) => {
+  const onSubmit = async (formData: Omit<Item, "updated_at" | "created_at" | "id">) => {
     try {
-      const response = await fetchItems.editItem(2, data);
+      const response = await fetchItems.editItem(item.id, formData);
       if (response.httpStatus === 200) {
         reset();
         toast({
@@ -71,6 +71,7 @@ const page = () => {
     <div>
       <Button
         onClick={handleOpen}
+        color={"green.500"}
         bg="white"
         border="2px"
         borderColor="green.500"
@@ -87,15 +88,15 @@ const page = () => {
           <ModalBody>
             <form onSubmit={handleSubmit(onSubmit)}>
               <Stack spacing={4}>
-              <FormControl>
-                <FormLabel>商品名</FormLabel>
-                <Input type="text" {...register("name")} />
-              </FormControl>
-              <FormControl>
-                <FormLabel>通貨コード</FormLabel>
-                <Input type="text" {...register("currencyCode")} />
+                <FormControl>
+                  <FormLabel>商品名</FormLabel>
+                  <Input type="text" {...register("name")} />
                 </FormControl>
-                </Stack>
+                <FormControl>
+                  <FormLabel>通貨コード</FormLabel>
+                  <Input type="text" {...register("currencyCode")} />
+                </FormControl>
+              </Stack>
             </form>
           </ModalBody>
           <ModalFooter>
@@ -117,4 +118,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default EditItemButton;
