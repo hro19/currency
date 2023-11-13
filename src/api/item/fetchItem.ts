@@ -30,4 +30,18 @@ export const fetchItems = {
     const data = await response.json();
     return data;
   },
+  editItem: async (itemId:number,formData:any) => {
+    const response = await fetch(
+      `https://currency-postgres.vercel.app/api/v1/items/${itemId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    );
+    const data = await response.json();
+    return data;
+  }
 };
