@@ -4,18 +4,13 @@ import React, { useState } from 'react'
 import { chakra,Input,FormControl, FormLabel,Stack, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Box, useToast } from "@chakra-ui/react"
 import { useForm } from "react-hook-form";
 import { fetchItems } from "@/api/item/fetchItem";
-
-type FormData = {
-  price: number;
-  itemId: number;
-  rate: number;
-  inverseRate: number;
-};
+import { ItemHistory } from "@/ts/Item";
 
 const Modalpage = () => {
 
   const [isOpen, setIsOpen] = useState(false)
-  const { register, handleSubmit,reset } = useForm<FormData>();
+  const { register, handleSubmit, reset } =
+    useForm<Omit<ItemHistory, "updated_at" | "created_at" | "id">>();
   const toast = useToast();
 
   const handleOpen = () => {
