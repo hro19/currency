@@ -1,7 +1,7 @@
 export const fetchItems = {
   getAll: async () => {
     try {
-      const response = await fetch("https://currency-postgres.vercel.app/api/v1/items");
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASIC_URL}/items`);
       if (!response.ok) {
         throw new Error("データの取得に失敗しました");
       }
@@ -17,22 +17,19 @@ export const fetchItems = {
     rate: number;
     inverseRate: number;
   }) => {
-    const response = await fetch(
-      "https://currency-postgres.vercel.app/api/v1/itemhistory",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      }
-    );
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASIC_URL}/itemhistory`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
     const data = await response.json();
     return data;
   },
   editItem: async (itemId:number,formData:any) => {
     const response = await fetch(
-      `https://currency-postgres.vercel.app/api/v1/items/${itemId}`,
+      `${process.env.NEXT_PUBLIC_API_BASIC_URL}/items/${itemId}`,
       {
         method: "PUT",
         headers: {
@@ -46,7 +43,7 @@ export const fetchItems = {
   },
   deliteItemHistory: async (itemHistoryId: number) => {
     const response = await fetch(
-      `https://currency-postgres.vercel.app/api/v1/itemhistory/${itemHistoryId}`,
+      `${process.env.NEXT_PUBLIC_API_BASIC_URL}/itemhistory/${itemHistoryId}`,
       {
         method: "DELETE",
       }
