@@ -8,10 +8,17 @@ import { fetchItems } from "@/api/item/fetchItem";
 const Page = () => {
   const { register, handleSubmit } = useForm();
 
-  const onSubmit: any = (data: { price: number; itemId: number }) => {
+  const onSubmit: any = (data: {
+    price: number;
+    itemId: number;
+    rate: number;
+    inverseRate: number;
+  }) => {
     const formData = {
       price: Number(data.price),
       itemId: Number(data.itemId),
+      rate: Number(data.rate),
+      inverseRate: Number(data.inverseRate),
     };
     fetchItems.addHistory(formData);
   };

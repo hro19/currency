@@ -1,37 +1,24 @@
-"use client";
 
-import React, { useState, useEffect } from "react";
-import {
-  Flex,
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
-  Box,
-  Center,
-  Heading,
-  Text,
-  Button,
-  ButtonGroup,
-  Spacer,
-} from "@chakra-ui/react";
-import { dateFormatter } from "@/utils/dateFns";
-import Image from "next/image";
-import AddItemHistoryButton from "@/components/item/AddItemHistoryButton";
-import EditItemButton from "@/components/item/EditItemButton";
-import { fetchItems } from "@/api/item/fetchItem";
 
-const ItemWrap = ({ item }: any) => {
+import React, { useState, useEffect } from 'react';
+import { Flex,Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon,
+    Box, Center , Heading, Text, Button, ButtonGroup, Spacer } from '@chakra-ui/react';
+import {dateFormatter} from "@/utils/dateFns";
+import Image from 'next/image';
+import { Item } from "@/ts/Item";
+import AddItemHistoryButton from '@/components/item/AddItemHistoryButton';
+import EditItemButton from './EditItemButton';
+
+const ItemWrap = ({ item }: { item: Item }) => {
   return (
     <>
       <Box key={item.id} className="relative p-4 border rounded shadow">
         <Box as={"i"} className="absolute -top-3 -right-3">
           <Image
             src={`/country/${item.currencyCode}.png`}
-            alt={item.currencyCode}
+            alt={item.currencyCode.toString()}
             width={40}
-            height={30}
+            height={40}
           />
         </Box>
 
@@ -61,12 +48,13 @@ const ItemWrap = ({ item }: any) => {
             <EditItemButton item={item} />
           </ButtonGroup>
           <Spacer />
-          <Text className="text-xs mr-3">
+          <Text className="mr-3 text-xs align-bottom">
             {item.histories &&
               item.histories.length > 0 &&
-              `【最新】${dateFormatter.dayJap(item.histories[0].created_at)}`}
+              `【最新】${dateFormatter.dayJap(item.histories[0].created_at.toString())}`}
           </Text>
         </Flex>
+
         <Accordion allowToggle>
           <AccordionItem>
             <Heading as={"h2"}>
@@ -95,17 +83,6 @@ const ItemWrap = ({ item }: any) => {
                             (レート:2.66)
                           </Text>
                         </Text>
-                        <Button
-                          size="xs"
-                          color={"pink.500"}
-                          bg="white"
-                          border="1px"
-                          borderColor="pink.500"
-                          fontSize={"xs"}
-                          onClick={() => fetchItems.deliteItemHistory(history.id)}
-                        >
-                          削除
-                        </Button>
                       </Flex>
                     </Box>
                   ))}
@@ -118,4 +95,4 @@ const ItemWrap = ({ item }: any) => {
   );
 };
 
-export default ItemWrap;
+export default ItemWrap
