@@ -20,7 +20,13 @@ import { useForm } from "react-hook-form";
 import { fetchItems } from "@/api/item/fetchItem";
 import { Item } from "@/ts/Item";
 
-const EditItemButton = ({ item }: { item: Item }) => {
+const itemDe = {
+  id: 1,
+  name: "綿菓子",
+  currencyCode: "php",
+}
+
+const EditItemButton = ({ item = itemDe }: { item: any }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { register, handleSubmit, reset } = useForm<
     Omit<Item, "updated_at" | "created_at" | "id">
