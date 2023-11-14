@@ -20,20 +20,14 @@ import { useForm } from "react-hook-form";
 import { fetchItems } from "@/api/item/fetchItem";
 import { Item } from "@/ts/Item";
 
-const itemDe = {
-  id: 1,
-  name: "綿菓子",
-  currencyCode: "php",
-}
-
-const EditItemButton = ({ item = itemDe }: { item: any }) => {
+const EditItemButton = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { register, handleSubmit, reset } = useForm<
     Omit<Item, "updated_at" | "created_at" | "id">
   >({
     defaultValues: {
-      name: item.name,
-      currencyCode: item.currencyCode,
+      name: "item.name",
+      currencyCode: "item.currencyCode",
     } as unknown as Omit<Item, "updated_at" | "created_at" | "id">,
   });
   const toast = useToast();
@@ -48,7 +42,7 @@ const EditItemButton = ({ item = itemDe }: { item: any }) => {
 
   const onSubmit = async (formData: Omit<Item, "updated_at" | "created_at" | "id">) => {
     try {
-      const response = await fetchItems.editItem(item.id, formData);
+      const response = await fetchItems.editItem(1, formData);
       if (response.httpStatus === 200) {
         reset();
         toast({
