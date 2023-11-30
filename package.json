@@ -20,7 +20,7 @@
     "next": "^14.0.2",
     "react": "latest",
     "react-dom": "latest",
-    "zustand": "^4.4.4"
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "@types/node": "latest",
