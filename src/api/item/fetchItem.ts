@@ -1,7 +1,12 @@
+import { TypehistorySchema } from "@/zod/historySchema";
+import {National} from "@/ts/Currency";
+
 export const fetchItems = {
   getAll: async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASIC_URL}/items`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASIC_URL}/items`, {
+        cache: "no-store",
+      });
       if (!response.ok) {
         throw new Error("データの取得に失敗しました");
       }
@@ -11,12 +16,7 @@ export const fetchItems = {
       console.error(error);
     }
   },
-  addHistory: async (formData: {
-    price: number;
-    itemId: number;
-    rate: number;
-    inverseRate: number;
-  }) => {
+  addHistory: async (formData: TypehistorySchema) => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASIC_URL}/itemhistory`, {
       method: "POST",
       headers: {
@@ -27,7 +27,7 @@ export const fetchItems = {
     const data = await response.json();
     return data;
   },
-  editItem: async (itemId:number,formData:any) => {
+  editItem: async (itemId: number, formData: unknown) => {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASIC_URL}/items/${itemId}`,
       {
@@ -47,8 +47,46 @@ export const fetchItems = {
       {
         method: "DELETE",
       }
-    )
+    );
     const data = await response.json();
     return data;
-  }
+  },
+  addItem: async (formData: {
+    name: string;
+    price: number;
+    currencyCode: string;
+    rate: number;
+    inverseRate: number;
+  }) => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASIC_URL}/itemsadd`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  getCurrentNationalAll: async (currencyCode: National) => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASIC_URL}/items/currency/${currencyCode}`,
+        {
+          cache: "no-store",
+        }
+      );
+      if (!response.ok) {
+        throw new Error("データの取得に失敗しました");
+      }
+      const data = await response.json();
+      return data.items;
+    } catch (error) {
+      console.error(error);
+    }
+  },
 };

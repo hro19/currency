@@ -3,7 +3,7 @@ function addNumbers(a: number, b: number): number {
     return a + b;
 }
 
-describe("addNumbers", () => {
+describe("足し算", () => {
     it("adds two numbers", () => {
         expect(addNumbers(2, 3)).toBe(5);
     });

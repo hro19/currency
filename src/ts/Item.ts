@@ -18,3 +18,11 @@ export type ItemHistory = {
   updated_at: Date;
   itemId: number;
 };
+
+export type ItemFormData = {
+  name: string;
+  price: number;
+  currencyCode: string;
+  rate: number;
+  inverseRate: number;
+};

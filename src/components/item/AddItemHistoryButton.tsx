@@ -1,40 +1,50 @@
 "use client";
 
-import React, { useState } from 'react'
-import { chakra,Input,FormControl, FormLabel,Stack, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Box, useToast } from "@chakra-ui/react"
+import React, { useState } from "react";
+import {
+  chakra,
+  Input,
+  FormControl,
+  FormLabel,
+  Stack,
+  Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
+  Box,
+  useToast,
+} from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { fetchItems } from "@/api/item/fetchItem";
 import { ItemHistory } from "@/ts/Item";
+import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
+import { Currency } from "@/ts/Currency";
+import { SubmitHandler } from "react-hook-form";
+import { useNational } from "@/zustand/national";
 
-const Modalpage = () => {
-
-  const [isOpen, setIsOpen] = useState(false)
+const Modalpage = ({ itemId, currencyData }: { itemId:number,currencyData:Currency }) => {
+  const [isOpen, setIsOpen] = useState(false);
   const { register, handleSubmit, reset } =
     useForm<Omit<ItemHistory, "updated_at" | "created_at" | "id">>();
   const toast = useToast();
 
   const handleOpen = () => {
-    setIsOpen(true)
-  }
+    setIsOpen(true);
+  };
 
   const handleClose = () => {
-    setIsOpen(false)
-  }
+    setIsOpen(false);
+  };
 
-  const onSubmit: any = async (data: {
-    price: number;
-    itemId: number;
-    rate: number;
-    inverseRate: number;
-  }) => {
-    const formData = {
-      price: Number(data.price),
-      itemId: Number(data.itemId),
-      rate: Number(data.rate),
-      inverseRate: Number(data.inverseRate),
-    };
-    const response = await fetchItems.addHistory(formData);
-    if (response.httpStatus === 201) {
+  const onSubmit: SubmitHandler<
+    Omit<ItemHistory, "updated_at" | "created_at" | "id">
+  > = async (data: Omit<ItemHistory, "updated_at" | "created_at" | "id">) => {
+    mutation.mutate(data);
+
+    if (isSuccess) {
       handleClose();
       reset();
       toast({
@@ -46,6 +56,22 @@ const Modalpage = () => {
       });
     }
   };
+
+  const queryClient = useQueryClient();
+
+  const { currentNational } = useNational();
+  const { isSuccess, refetch } = useQuery({
+    queryKey: ["items_CurrentNational"],
+    queryFn: () => fetchItems.getCurrentNationalAll(currentNational),
+  });
+
+  const mutation = useMutation({
+    mutationFn: fetchItems.addHistory,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["items"] });
+      refetch();
+    },
+  });
 
   return (
     <Box>
@@ -76,36 +102,39 @@ const Modalpage = () => {
                   <Input
                     type="number"
                     id="price"
-                    {...register("price", { required: true })}
+                    {...register("price", { required: true, valueAsNumber: true })}
                   />
                 </FormControl>
 
-                <FormControl display="block">
+                <FormControl hidden>
                   <FormLabel>Item ID:</FormLabel>
                   <Input
                     type="number"
                     id="itemId"
-                    {...register("itemId", { required: true })}
+                    {...register("itemId", { required: true, valueAsNumber: true })}
+                    value={itemId}
                   />
                 </FormControl>
 
-                <FormControl display="block">
+                <FormControl hidden>
                   <FormLabel>Rate（小数点第二まで）:</FormLabel>
                   <Input
                     type="number"
                     id="rate"
                     step="0.01"
-                    {...register("rate", { required: true })}
+                    {...register("rate", { required: true, valueAsNumber: true })}
+                    value={currencyData.rate}
                   />
                 </FormControl>
 
-                <FormControl display="block">
+                <FormControl hidden>
                   <FormLabel>Inverse Rate（小数点第二まで）:</FormLabel>
                   <Input
                     type="number"
                     id="inverseRate"
                     step="0.01"
-                    {...register("inverseRate", { required: true })}
+                    {...register("inverseRate", { required: true, valueAsNumber: true })}
+                    value={currencyData.inverseRate}
                   />
                 </FormControl>
 
@@ -126,6 +155,6 @@ const Modalpage = () => {
       </Modal>
     </Box>
   );
-}
+};
 
 export default Modalpage;

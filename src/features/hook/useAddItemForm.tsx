@@ -18,7 +18,7 @@ export const useAddItemForm = () => {
     queryFn: () =>
       slug === "jpy"
         ? fetchItems.getAll()
-        : () => fetchItems.getCurrentNationalAll(currentNational),
+        : fetchItems.getCurrentNationalAll(currentNational),
   });
 
   const Addmutation = useMutation({

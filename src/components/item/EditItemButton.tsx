@@ -19,16 +19,17 @@ import {
 import { useForm } from "react-hook-form";
 import { fetchItems } from "@/api/item/fetchItem";
 import { Item } from "@/ts/Item";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useNational } from "@/zustand/national";
 
-const EditItemButton = ({ item }: { item:Item }) => {
+const EditItemButton = ({ item }: { item: Item }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { register, handleSubmit, reset } = useForm<
+  const { register, handleSubmit } = useForm<
     Omit<Item, "updated_at" | "created_at" | "id">
   >({
     defaultValues: {
       name: item.name,
-      currencyCode: item.currencyCode,
-    } as unknown as Omit<Item, "updated_at" | "created_at" | "id">,
+    } as unknown as Pick<Item, "name">,
   });
   const toast = useToast();
 
@@ -40,29 +41,32 @@ const EditItemButton = ({ item }: { item:Item }) => {
     setIsOpen(false);
   };
 
-  const onSubmit = async (formData: Omit<Item, "updated_at" | "created_at" | "id">) => {
-    try {
-      const response = await fetchItems.editItem(item.id, formData);
-      if (response.httpStatus === 200) {
-        reset();
-        toast({
-          title: "Success!",
-          status: "success",
-          duration: 3000,
-          isClosable: true,
-        });
-        handleClose();
-      } else {
-        throw new Error("Failed to submit form");
-      }
-    } catch (error) {
-      console.error(error);
+  const { currentNational } = useNational();
+  const { isSuccess, refetch } = useQuery({
+    queryKey: ["items_CurrentNational"],
+    queryFn: () => fetchItems.getCurrentNationalAll(currentNational),
+  });
+
+  const editMutation = useMutation({
+    mutationFn: (formData: { name: string }) => {
+      return fetchItems.editItem(item.id, formData);
+    },
+    onSuccess: () => {
+      refetch();
+    },
+  });
+
+  const onSubmit = async (formData: { name: string }) => {
+    editMutation.mutate(formData);
+
+    if (isSuccess) {
+      handleClose();
       toast({
-        title: "Error!",
-        description: "Failed to submit form",
-        status: "error",
+        title: "作成成功",
+        status: "success",
         duration: 3000,
         isClosable: true,
+        position: "bottom",
       });
     }
   };
@@ -91,10 +95,6 @@ const EditItemButton = ({ item }: { item:Item }) => {
                 <FormControl>
                   <FormLabel>商品名</FormLabel>
                   <Input type="text" {...register("name")} />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>通貨コード</FormLabel>
-                  <Input type="text" {...register("currencyCode")} />
                 </FormControl>
               </Stack>
             </form>

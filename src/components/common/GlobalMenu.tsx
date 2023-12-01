@@ -2,23 +2,12 @@
 
 import React from 'react';
 import Link from 'next/link';
-import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
-  Button,
-  Text
-} from "@chakra-ui/react";
+import { Menu, MenuButton, MenuList, MenuItem, Button, Text, Box } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 
 const GlobalMenu = () => {
     return (
-      <div className="fixed top-1 right-2">
+      <Box className="fixed top-1 right-2 z-20">
         <Menu>
           {({ isOpen }) => (
             <>
@@ -37,6 +26,11 @@ const GlobalMenu = () => {
                   </Link>
                 </MenuItem>
                 <MenuItem>
+                  <Link href="/currency/items" className="w-full">
+                    アイテム一覧
+                  </Link>
+                </MenuItem>
+                <MenuItem>
                   <Link href="/currency/php" className="w-full">
                     通貨テーブル
                   </Link>
@@ -50,7 +44,7 @@ const GlobalMenu = () => {
             </>
           )}
         </Menu>
-      </div>
+      </Box>
     );
 }
 

@@ -1,51 +1,16 @@
 "use client";
 
 import React, { useState } from 'react'
-import { chakra,Input,FormControl, FormLabel,Stack, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Box, useToast } from "@chakra-ui/react"
-import { useForm } from "react-hook-form";
-import { fetchItems } from "@/api/item/fetchItem";
-import { ItemHistory } from "@/ts/Item";
+import { chakra,Input,FormControl,FormErrorMessage, FormLabel,Stack, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Box, useToast } from "@chakra-ui/react"
+import { useAddForm } from "@/features/hook/useAddform";
+import { useModalToggle } from '@/features/hook/useModalToggle';
 
 const Modalpage = () => {
-
-  const [isOpen, setIsOpen] = useState(false)
-  const { register, handleSubmit, reset } =
-    useForm<Omit<ItemHistory, "updated_at" | "created_at" | "id">>();
-  const toast = useToast();
-
-  const handleOpen = () => {
-    setIsOpen(true)
-  }
-
-  const handleClose = () => {
-    setIsOpen(false)
-  }
-
-  const onSubmit: any = async (data: {
-    price: number;
-    itemId: number;
-    rate: number;
-    inverseRate: number;
-  }) => {
-    const formData = {
-      price: Number(data.price),
-      itemId: Number(data.itemId),
-      rate: Number(data.rate),
-      inverseRate: Number(data.inverseRate),
-    };
-    const response = await fetchItems.addHistory(formData);
-    if (response.httpStatus === 201) {
-      handleClose();
-      reset();
-      toast({
-        title: "作成成功",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-        position: "bottom",
-      });
-    }
-  };
+  const { isModalOpen, setIsModalOpen, handleOpen, handleClose } = useModalToggle();
+  const { register, onSubmit, errors } = useAddForm({
+    successMessage: "成功",
+    setIsModalOpen: setIsModalOpen,
+  });
 
   return (
     <Box>
@@ -59,53 +24,56 @@ const Modalpage = () => {
       >
         価格新規追加
       </Button>
-      <Modal isOpen={isOpen} onClose={handleClose}>
+      <Modal isOpen={isModalOpen} onClose={handleClose}>
         <ModalOverlay />
         <ModalContent py={6}>
           <ModalHeader>価格新規追加</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <chakra.form
-              onSubmit={handleSubmit(onSubmit)}
-              className="flex flex-col space-y-4"
-            >
+            <chakra.form onSubmit={onSubmit} className="flex flex-col space-y-4">
               <Stack spacing={6}>
-                <FormControl display="block">
+                <FormControl display="block" isInvalid={!!errors.price}>
                   <FormLabel>Price:</FormLabel>
                   <Input
-                    type="number"
                     id="price"
-                    {...register("price", { required: true })}
+                    {...register("price", { required: true, valueAsNumber: true })}
                   />
+                  <FormErrorMessage>
+                    {errors.price && (errors.price.message as string)}
+                  </FormErrorMessage>
                 </FormControl>
 
-                <FormControl display="block">
+                <FormControl display="block" isInvalid={!!errors.itemId}>
                   <FormLabel>Item ID:</FormLabel>
                   <Input
-                    type="number"
                     id="itemId"
-                    {...register("itemId", { required: true })}
+                    {...register("itemId", { required: true, valueAsNumber: true })}
                   />
+                  <FormErrorMessage>
+                    {errors.itemId && (errors.itemId.message as string)}
+                  </FormErrorMessage>
                 </FormControl>
 
-                <FormControl display="block">
+                <FormControl display="block" isInvalid={!!errors.rate}>
                   <FormLabel>Rate（小数点第二まで）:</FormLabel>
                   <Input
-                    type="number"
                     id="rate"
-                    step="0.01"
-                    {...register("rate", { required: true })}
+                    {...register("rate", { required: true, valueAsNumber: true })}
                   />
+                  <FormErrorMessage>
+                    {errors.rate && (errors.rate.message as string)}
+                  </FormErrorMessage>
                 </FormControl>
 
-                <FormControl display="block">
+                <FormControl display="block" isInvalid={!!errors.inverseRate}>
                   <FormLabel>Inverse Rate（小数点第二まで）:</FormLabel>
                   <Input
-                    type="number"
                     id="inverseRate"
-                    step="0.01"
-                    {...register("inverseRate", { required: true })}
+                    {...register("inverseRate", { required: true, valueAsNumber: true })}
                   />
+                  <FormErrorMessage>
+                    {errors.inverseRate && (errors.inverseRate.message as string)}
+                  </FormErrorMessage>
                 </FormControl>
 
                 <Button

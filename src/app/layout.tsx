@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Providers } from "./providers";
 import GlobalMenu from '@/components/common/GlobalMenu';
-
+import { HeadUser } from "@/components/HeadUser";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,6 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
+          <HeadUser />
           <GlobalMenu />
           {children}
         </Providers>
