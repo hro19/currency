@@ -42,7 +42,7 @@ const ItemWrap = ({ item, currencyData }: any) => {
           </Box>
           <Spacer />
           <Flex direction="column" gap={1}>
-            <Text fontSize={"lg"}>
+            <Text fontSize={"md"}>
               {item.histories && item.histories.length > 0 && item.histories[0].price}
               {NATIONAL_i18n[item.currencyCode.toString()].currencyName.ja}
             </Text>
