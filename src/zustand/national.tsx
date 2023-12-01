@@ -1,4 +1,4 @@
-import create from "zustand";
+import { create } from "zustand";
 import { National } from "@/ts/Currency";
 
 type useNationalType = {
@@ -10,7 +10,6 @@ export const useNational = create<useNationalType>((set) => ({
   currentNational: "usd",
   setCurrentNational: (national) => set(() => ({ currentNational: national })),
 }));
-
 
 export const NATIONAL: National[] = [
   "aud",
