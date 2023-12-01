@@ -12,7 +12,8 @@
   },
   "ignorePatterns": ["./next*", "**/*.js", "**/*.cjs", "package-lock.json"],
   "rules": {
-    "@typescript-eslint/no-explicit-any": "off"
+    "@typescript-eslint/no-explicit-any": "off",
+    "tailwindcss/no-custom-classname": "off"
   },
   "settings": {
     "tailwindcss": {
