@@ -7,19 +7,19 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 
 const GlobalMenu = () => {
     return (
-      <Box className="fixed top-1 right-2 z-20">
+      <Box className="fixed right-2 top-1 z-20">
         <Menu>
           {({ isOpen }) => (
             <>
               <MenuButton
                 isActive={isOpen}
                 as={Button}
-                className="bg-stone-300 p-3 rounded-xl opacity-90 border border-gray-400"
+                className="rounded-xl border border-gray-400 bg-stone-300 p-3 opacity-90"
                 rightIcon={<ChevronDownIcon />}
               >
                 {isOpen ? "Close" : "Open"}
               </MenuButton>
-              <MenuList className="bg-stone-500 p-3 rounded-xl text-white">
+              <MenuList className="rounded-xl bg-stone-500 p-3 text-white">
                 <MenuItem>
                   <Link href="/" className="w-full">
                     <Text>トップ</Text>

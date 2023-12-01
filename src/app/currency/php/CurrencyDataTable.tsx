@@ -6,22 +6,15 @@ import { dateFormatter } from "@/utils/dateFns";
 import { GetApiCurency } from "@/api/currency/getApiCurrency";
 import { useNational, NATIONAL_i18n } from "@/zustand/national";
 import {
-  Box,
   Center,
-  Button,
-  Heading,
-  Text,
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
   TableCaption,
   TableContainer,
-  Stack,
-  Select,
 } from "@chakra-ui/react";
 
 const CurrencyDataTable = ({ currencyData }: { currencyData: CurrencyObj }) => {
@@ -50,7 +43,7 @@ const CurrencyDataTable = ({ currencyData }: { currencyData: CurrencyObj }) => {
       <TableContainer maxWidth="90%" mx="auto">
         <Table size="sm" variant="striped" colorScheme="orange">
           <TableCaption>Free JSON Currency Exchange Rate Feeds</TableCaption>
-          <Thead className="bg-gray-200 text-gray-700 py-4">
+          <Thead className="bg-gray-200 py-4 text-gray-700">
             <Tr>
               <Th fontSize="xl" lineHeight="tall">
                 国

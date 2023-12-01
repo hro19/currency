@@ -1,4 +1,4 @@
-import { Currency, CurrencyObj, National } from "@/ts/Currency";
+import { CurrencyObj, National } from "@/ts/Currency";
 
 //デフォルト値はjpy（日本）とする
 export const GetApiCurency = async (national: National = "jpy"): Promise<CurrencyObj> => {

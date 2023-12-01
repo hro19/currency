@@ -5,7 +5,7 @@ import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import Bbb from "./Bbb";
 
-test("reactテスティングライブラリー 基礎", () => {
+test("reactテスティングライブラリー 基礎の使い方", () => {
   render(<Bbb />);
 
   // テスト対象のコンポーネントがレンダリングされたことを確認

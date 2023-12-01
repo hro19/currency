@@ -8,7 +8,7 @@ type useNationalType = {
 
 export const useNational = create<useNationalType>((set) => ({
   currentNational: "usd",
-  setCurrentNational: (national) => set((state) => ({ currentNational: national })),
+  setCurrentNational: (national) => set(() => ({ currentNational: national })),
 }));
 
 
@@ -28,7 +28,7 @@ export const NATIONALexceptJap: National[] = NATIONAL.filter(
   (national: National) => national !== "jpy"
 );
 
-export const NATIONAL_i18n = {
+export const NATIONAL_i18n: any = {
   aud: {
     name: {
       ja: "オーストラリア",

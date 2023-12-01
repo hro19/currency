@@ -49,11 +49,11 @@ const Page = () => {
         inputMode="numeric"
         value={calculation.base_value}
         onChange={(e) => onChangeHandler(e.target.value)}
-        className="w-48 px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+        className="w-48 rounded-lg border px-3 py-2 focus:border-blue-300 focus:outline-none focus:ring"
       />
       <button
         type="submit"
-        className="bg-emerald-400 text-white px-4 py-2 rounded-lg ml-2 hover:bg-emerald-600"
+        className="ml-2 rounded-lg bg-emerald-400 px-4 py-2 text-white hover:bg-emerald-600"
       >
         レート計算
       </button>

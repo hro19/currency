@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   Flex,
   Accordion,
@@ -9,10 +9,8 @@ import {
   AccordionPanel,
   AccordionIcon,
   Box,
-  Center,
   Heading,
   Text,
-  Button,
   ButtonGroup,
   Spacer,
 } from "@chakra-ui/react";
@@ -20,13 +18,14 @@ import { dateFormatter } from "@/utils/dateFns";
 import Image from "next/image";
 import AddItemHistoryButton from "@/components/item/AddItemHistoryButton";
 import EditItemButton from "@/components/item/EditItemButton";
-import { fetchItems } from "@/api/item/fetchItem";
+import DeliteHstoryButton from "../item/DeliteHstoryButton";
+import { NATIONAL_i18n } from "@/zustand/national";
 
-const ItemWrap = ({ item }: any) => {
+const ItemWrap = ({ item, currencyData }: any) => {
   return (
     <>
-      <Box key={item.id} className="relative p-4 border rounded shadow">
-        <Box as={"i"} className="absolute -top-3 -right-3">
+      <Box key={item.id} className="relative rounded border p-4 shadow">
+        <Box as={"i"} className="absolute -right-3 -top-3">
           <Image
             src={`/country/${item.currencyCode}.png`}
             alt={item.currencyCode}
@@ -43,25 +42,25 @@ const ItemWrap = ({ item }: any) => {
           </Box>
           <Spacer />
           <Flex direction="column" gap={1}>
-            <Text className="text-md">
+            <Text fontSize={"lg"}>
               {item.histories && item.histories.length > 0 && item.histories[0].price}
-              フィリピンペソ
+              {NATIONAL_i18n[item.currencyCode.toString()].currencyName.ja}
             </Text>
             <Text className="text-lg">
               {item.histories &&
                 item.histories.length > 0 &&
-                Math.floor(item.histories[0].price * 2.66)}
-              円（レート:2.66）
+                Math.floor(item.histories[0].price * item.histories[0].inverseRate)}
+              円（レート:{item.histories[0].inverseRate.toFixed(2)}）
             </Text>
           </Flex>
         </Flex>
         <Flex alignItems={"flex-end"} mb={2}>
           <ButtonGroup variant="outline" gap={0}>
-            <AddItemHistoryButton />
+            <AddItemHistoryButton itemId={item.id} currencyData={currencyData} />
             <EditItemButton item={item} />
           </ButtonGroup>
           <Spacer />
-          <Text className="text-xs mr-3">
+          <Text className="mr-3 text-xs">
             {item.histories &&
               item.histories.length > 0 &&
               `【最新】${dateFormatter.dayJap(item.histories[0].created_at)}`}
@@ -87,25 +86,16 @@ const ItemWrap = ({ item }: any) => {
                           {dateFormatter.fun(history.created_at)}
                         </Text>
                         <Heading as={"h4"} className="text-base">
-                          {history.price}フィリピンペソ
+                          {history.price}
+                          {NATIONAL_i18n[item.currencyCode.toString()].currencyName.ja}
                         </Heading>
                         <Text as={"p"} className="text-xl">
-                          {history.price}円
+                          {Math.floor(history.price * history.inverseRate)}円
                           <Text as="span" className="text-sm">
-                            (レート:2.66)
+                            (レート:{history.inverseRate.toFixed(2)})
                           </Text>
                         </Text>
-                        <Button
-                          size="xs"
-                          color={"pink.500"}
-                          bg="white"
-                          border="1px"
-                          borderColor="pink.500"
-                          fontSize={"xs"}
-                          onClick={() => fetchItems.deliteItemHistory(history.id)}
-                        >
-                          削除
-                        </Button>
+                        <DeliteHstoryButton historyId={history.id} />
                       </Flex>
                     </Box>
                   ))}

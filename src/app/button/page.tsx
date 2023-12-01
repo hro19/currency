@@ -4,7 +4,7 @@ import { Box, Center, Button } from "@chakra-ui/react";
 const page = () => {
   return (
     <div className="m-4">
-      <h2 className="text-pink-500 text-4xl font-bold">ボタンのページ</h2>
+      <h2 className="text-4xl font-bold text-pink-500">ボタンのページ</h2>
       <Box>
         <Center bgColor="orange.500" color="white" p="4">
           This is the Box
