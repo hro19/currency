@@ -34,7 +34,7 @@ export const NATIONAL_i18n: any = {
       ja: "オーストラリア",
     },
     currencyName: {
-      ja: "オーストラリアドル",
+      ja: "ドル",
     },
   },
   cny: {
@@ -42,7 +42,7 @@ export const NATIONAL_i18n: any = {
       ja: "中国",
     },
     currencyName: {
-      ja: "中国元",
+      ja: "元",
     },
   },
   krw: {
@@ -50,7 +50,7 @@ export const NATIONAL_i18n: any = {
       ja: "韓国",
     },
     currencyName: {
-      ja: "韓国ウォン",
+      ja: "ウォン",
     },
   },
   thb: {
@@ -58,7 +58,7 @@ export const NATIONAL_i18n: any = {
       ja: "タイ",
     },
     currencyName: {
-      ja: "タイバーツ",
+      ja: "バーツ",
     },
   },
   twd: {
@@ -66,7 +66,7 @@ export const NATIONAL_i18n: any = {
       ja: "台湾",
     },
     currencyName: {
-      ja: "台湾ドル",
+      ja: "ドル",
     },
   },
   vnd: {
@@ -74,7 +74,7 @@ export const NATIONAL_i18n: any = {
       ja: "ベトナム",
     },
     currencyName: {
-      ja: "ベトナムドン",
+      ja: "ドン",
     },
   },
   jpy: {
@@ -82,7 +82,7 @@ export const NATIONAL_i18n: any = {
       ja: "日本",
     },
     currencyName: {
-      ja: "日本円",
+      ja: "円",
     },
   },
   php: {
@@ -90,7 +90,7 @@ export const NATIONAL_i18n: any = {
       ja: "フィリピン",
     },
     currencyName: {
-      ja: "フィリピンペソ",
+      ja: "ペソ",
     },
   },
   usd: {
@@ -98,7 +98,7 @@ export const NATIONAL_i18n: any = {
       ja: "アメリカ合衆国",
     },
     currencyName: {
-      ja: "アメリカドル",
+      ja: "ドル",
     },
   },
 };
