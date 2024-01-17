@@ -6,6 +6,7 @@ import SelectNational from "@/app/currency/php/SelectNational";
 import HeaderTitle from "@/components/common/HeaderTitle";
 import { Box, Heading, Text } from "@chakra-ui/react";
 import Image from "next/image";
+import SimpleAreaChart from "@/lib/rechart/SimpleAreaChart";
 
 const Home = async () => {
   const currencyObjData: Awaited<CurrencyObj> = await GetApiCurency("jpy");
@@ -27,9 +28,9 @@ const Home = async () => {
         </Text>
       </Box>
       <Box>
-        <section className="py-6 dark:bg-gray-800 dark:text-gray-100">
-          <div className="container mx-auto flex flex-col lg:flex-row">
-            <div className="flex w-full flex-col items-center justify-center justify-items-center lg:w-1/3">
+        <section className="py-2 dark:bg-gray-800 dark:text-gray-100">
+          <div className="container mx-auto flex flex-col lg:flex-row lg:justify-center">
+            <div className="flex flex-col items-center justify-center justify-items-center lg:items-end">
               <Image
                 src="/items/food_gapao_rice.png"
                 alt="写真"
@@ -38,12 +39,14 @@ const Home = async () => {
               />
               <h2 className="text-xl">ガパオライス（1皿）</h2>
             </div>
-            <div className="flex w-full flex-col p-6 md:p-8 lg:w-2/3 lg:p-12">ままま</div>
+            <div className="flex flex-col p-6 md:p-8 lg:p-12">
+              <SimpleAreaChart />
+            </div>
           </div>
         </section>
-        <section className="py-6 dark:bg-gray-400 dark:text-gray-100">
-          <div className="container mx-auto flex flex-col lg:flex-row">
-            <div className="flex w-full flex-col items-center justify-center justify-items-center lg:w-1/3">
+        <section className="py-2 dark:bg-gray-400 dark:text-white">
+          <div className="container mx-auto flex flex-col lg:flex-row lg:justify-center">
+            <div className="flex flex-col items-center justify-center justify-items-center lg:items-end">
               <Image
                 src="/items/building_cinema.png"
                 alt="写真"
@@ -52,12 +55,14 @@ const Home = async () => {
               />
               <h2 className="text-xl">映画鑑賞（1チケット）</h2>
             </div>
-            <div className="flex w-full flex-col p-6 md:p-8 lg:w-2/3 lg:p-12">ままま</div>
+            <div className="flex flex-col p-6 md:p-8 lg:p-12">
+              <SimpleAreaChart />
+            </div>
           </div>
         </section>
-        <section className="py-6 dark:bg-gray-700 dark:text-gray-100">
-          <div className="container mx-auto flex flex-col lg:flex-row">
-            <div className="flex w-full flex-col items-center justify-center justify-items-center lg:w-1/3">
+        <section className="py-2 dark:bg-gray-700 dark:text-gray-100">
+          <div className="container mx-auto flex flex-col lg:flex-row lg:justify-center">
+            <div className="flex flex-col items-center justify-center justify-items-center lg:items-end">
               <Image
                 src="/items/gomi_potatochips_fukuro.png"
                 alt="写真"
@@ -66,7 +71,9 @@ const Home = async () => {
               />
               <h2 className="text-xl">ポテトチップス（1袋:80g）</h2>
             </div>
-            <div className="flex w-full flex-col p-6 md:p-8 lg:w-2/3 lg:p-12">ままま</div>
+            <div className="flex flex-col p-6 md:p-8 lg:p-12">
+              <SimpleAreaChart />
+            </div>
           </div>
         </section>
       </Box>
