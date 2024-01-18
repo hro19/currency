@@ -32,6 +32,7 @@ const Home = async () => {
       <Box>
         <ItemAnalysis
           bgColor={"bg-gray-800"}
+          countryFlag={"thb"}
           itemName={"ガパオライス（1皿）"}
           itemPicture={"food_gapao_rice"}
           graphData={gapaoData}
@@ -41,6 +42,7 @@ const Home = async () => {
         />
         <ItemAnalysis
           bgColor={"bg-gray-400"}
+          countryFlag={"krw"}
           itemName={"映画チケット（1枚）"}
           itemPicture={"building_cinema"}
           graphData={cinemaData}
@@ -50,6 +52,7 @@ const Home = async () => {
         />
         <ItemAnalysis
           bgColor={"bg-gray-700"}
+          countryFlag={"php"}
           itemName={"ポテトチップス（1袋:80g）"}
           itemPicture={"gomi_potatochips_fukuro"}
           graphData={potetochipData}
