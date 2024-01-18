@@ -16,6 +16,7 @@ import { useAddItemForm } from "@/features/hook/useAddItemForm";
 import { ItemFormData } from "@/ts/Item";
 import { NATIONAL_i18n } from "@/zustand/national";
 import { SubmitHandler } from "react-hook-form";
+import { useSession } from "next-auth/react";
 
 const JpyForm = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
   const {
@@ -33,17 +34,21 @@ const JpyForm = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
   const { setInputPrice } = inputPriceStore();
   const toast = useToast();
   const price = watch("price");
+  const { data: session, status } = useSession();
+  console.log(session?.user?.email);
 
   useEffect(() => {
     if (currentNational) {
       const computedRate = currencyObjData[currentNational].rate;
       const computedInverseRate = currencyObjData[currentNational].inverseRate;
+      const computedEmail = session?.user?.email || "";
 
       setValue("currencyCode", currentNational);
       setValue("rate", computedRate);
       setValue("inverseRate", computedInverseRate);
+      // setValue("userEmail", computedEmail);
     }
-  }, [currentNational, currencyObjData, setValue]);
+  }, [currentNational, currencyObjData, setValue, session]);
 
   useEffect(() => {
     setInputPrice(price);
@@ -62,21 +67,24 @@ const JpyForm = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
           isClosable: true,
           position: "bottom",
         });
+        console.log(data);
       },
     });
   };
 
   return (
     <chakra.form>
-      <FormControl id="name" mt={4}>
-        <Input
-          type="text"
-          id="name"
-          {...register("name", { required: true })}
-          placeholder="商品名"
-          className="my-4 rounded-lg border border-gray-300 bg-white px-3 py-2 text-2xl focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </FormControl>
+      {status === "authenticated" && (
+        <FormControl id="name" mt={4}>
+          <Input
+            type="text"
+            id="name"
+            {...register("name", { required: true })}
+            placeholder="商品名"
+            className="my-4 rounded-lg border border-gray-300 bg-white px-3 py-2 text-2xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </FormControl>
+      )}
 
       <FormControl id="price">
         <InputGroup>
@@ -122,15 +130,36 @@ const JpyForm = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
         />
       </FormControl>
 
-      <Button
-        type="submit"
-        className={"bg-indigo-600 hover:bg-indigo-400"}
-        color={"white"}
-        fontSize="lg"
-        onClick={handleSubmit(onSubmit)}
-      >
-        新規作成
-      </Button>
+      {/* <FormControl hidden>
+        <Input
+          type="text"
+          id="userEmail"
+          {...register("userEmail", { required: true })}
+        />
+      </FormControl> */}
+
+      {status === "unauthenticated" ? (
+        <div className="mt-2">
+          <a
+            className={
+              " rounded-md bg-indigo-600 px-3 py-2 text-white hover:bg-indigo-400"
+            }
+            href="#"
+          >
+            ログインする
+          </a>
+        </div>
+      ) : (
+        <Button
+          type="submit"
+          className={"bg-indigo-600 hover:bg-indigo-400"}
+          color={"white"}
+          fontSize="lg"
+          onClick={handleSubmit(onSubmit)}
+        >
+          新規作成
+        </Button>
+      )}
     </chakra.form>
   );
 };
