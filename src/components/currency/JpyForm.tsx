@@ -35,7 +35,7 @@ const JpyForm = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
   const toast = useToast();
   const price = watch("price");
   const { data: session, status } = useSession();
-  console.log(session?.user?.email);
+  // console.log(session?.user?.email);
 
   useEffect(() => {
     if (currentNational) {
@@ -46,7 +46,7 @@ const JpyForm = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
       setValue("currencyCode", currentNational);
       setValue("rate", computedRate);
       setValue("inverseRate", computedInverseRate);
-      // setValue("userEmail", computedEmail);
+      setValue("userEmail", computedEmail);
     }
   }, [currentNational, currencyObjData, setValue, session]);
 
@@ -130,13 +130,21 @@ const JpyForm = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
         />
       </FormControl>
 
-      {/* <FormControl hidden>
+      <FormControl hidden>
         <Input
           type="text"
           id="userEmail"
           {...register("userEmail", { required: true })}
         />
-      </FormControl> */}
+      </FormControl>
+
+      <FormControl hidden>
+        <Input
+          type="text"
+          id="userEmail"
+          {...register("userEmail", { required: true })}
+        />
+      </FormControl>
 
       {status === "unauthenticated" ? (
         <div className="mt-2">

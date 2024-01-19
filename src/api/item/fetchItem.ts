@@ -57,6 +57,7 @@ export const fetchItems = {
     currencyCode: string;
     rate: number;
     inverseRate: number;
+    userEmail: string;
   }) => {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASIC_URL}/itemsadd`, {

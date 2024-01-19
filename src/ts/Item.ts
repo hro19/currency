@@ -5,6 +5,7 @@ export type Item = {
   created_at: Date;
   updated_at: Date;
   histories: ItemHistory[];
+  userEmail: string;
 };
 
 export type CurrencyCode = ["php", "thb"];
@@ -25,4 +26,5 @@ export type ItemFormData = {
   currencyCode: string;
   rate: number;
   inverseRate: number;
+  userEmail: string;
 };
