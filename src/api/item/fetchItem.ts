@@ -1,10 +1,16 @@
 import { TypehistorySchema } from "@/zod/historySchema";
-import {National} from "@/ts/Currency";
+import { National } from "@/ts/Currency";
+import Cookies from "js-cookie";
 
 export const fetchItems = {
   getAll: async () => {
+    const useremail: string = Cookies.get("userEmail") || "";
+    console.log(useremail);
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASIC_URL}/items`, {
+        headers: {
+          Useremail: useremail,
+        },
         cache: "no-store",
       });
       if (!response.ok) {
@@ -78,6 +84,9 @@ export const fetchItems = {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_BASIC_URL}/items/currency/${currencyCode}`,
         {
+          headers: {
+            Useremail: "dropmoment19@gmail.com",
+          },
           cache: "no-store",
         }
       );

@@ -9,11 +9,14 @@ import { dateFormatter } from "@/utils/dateFns";
 import { NATIONAL_i18n } from "@/zustand/national";
 import { National } from "@/ts/Currency";
 import Image from "next/image";
+import { fetchItems } from "@/api/item/fetchItem";
 
-const JpyTable = ({ items }: { items: Item[] }) => {
+const JpyTable = ({ userEmail }: { userEmail:string }) => {
+  // console.log(userEmail);
+
   const { isPending, isError, data, error } = useQuery({
     queryKey: ["items"],
-    queryFn: () => [...items],
+    queryFn: fetchItems.getAll,
   });
 
   if (isPending) {
