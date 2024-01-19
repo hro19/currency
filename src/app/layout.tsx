@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { Providers } from "./providers";
 import GlobalMenu from '@/components/common/GlobalMenu';
 import { HeadUser } from "@/components/HeadUser";
+import CookieSetUserEmail from "@/lib/next-auth/CookieSetUserEmail";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,6 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
+          <CookieSetUserEmail />
           <HeadUser />
           <GlobalMenu />
           {children}

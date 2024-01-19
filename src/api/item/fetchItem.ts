@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 export const fetchItems = {
   getAll: async () => {
     const useremail: string = Cookies.get("userEmail") || "";
-    console.log(useremail);
+    // console.log(useremail);
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASIC_URL}/items`, {
         headers: {
