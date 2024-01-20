@@ -150,9 +150,9 @@ const JpyForm = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
         <div className="mt-2">
           <a
             className={
-              " rounded-md bg-indigo-600 px-3 py-2 text-white hover:bg-indigo-400"
+              " rounded-md bg-indigo-600 px-4 py-3 font-bold text-white hover:bg-indigo-400"
             }
-            href="#"
+            href="/currency/jpy"
           >
             ログインする
           </a>
