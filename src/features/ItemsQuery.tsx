@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import ItemCard from "@/components/item/ItemCard";
 import { Item } from "@/ts/Item";
 import { useQuery } from "@tanstack/react-query";
@@ -20,6 +20,7 @@ const ItemsQuery = ({
   userEmail:string;
 }) => {
   const { currentNational } = useNational();
+  
   const { setUserEmail } = userEmailStore();
   useEffect(() => {
     setUserEmail(userEmail);
@@ -29,11 +30,12 @@ const ItemsQuery = ({
     queryKey: ["items_CurrentNational", currentNational, userEmail],
     queryFn: () => fetchItems.getCurrentNationalAll(currentNational, userEmail),
   });
-  const isEmpty = isfilteredDataEmpty(data);
 
+  const [isEmpty, setIsEmpty] = useState<boolean>(false);
   useEffect(() => {
+    setIsEmpty(isfilteredDataEmpty(data));
     refetch();
-  }, [currentNational, refetch]);
+  }, [refetch, data, setIsEmpty]);
 
   if (isPending) {
     return (
@@ -57,16 +59,20 @@ const ItemsQuery = ({
     ))
     .otherwise(() => (
       <Grid templateColumns={{ base: "1fr", lg: "repeat(2, 1fr)" }} gap={4} mx={3}>
-        {data.map((item: Item) => (
-          <GridItem key={item.id}>
-            <ItemCard
-              item={item}
-              currencyData={currencyObjData[item.currencyCode.toString()]}
-            />
-          </GridItem>
-        ))}
+        {Array.isArray(data) ? (
+          data.map((item: Item) => (
+            <GridItem key={item.id}>
+              <ItemCard
+                item={item}
+                currencyData={currencyObjData[item.currencyCode.toString()]}
+              />
+            </GridItem>
+          ))
+        ) : (
+          <p>表示できるデータがありません</p>
+        )}
       </Grid>
     ));
-};
+  };
 
 export default ItemsQuery;

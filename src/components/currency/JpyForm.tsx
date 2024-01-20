@@ -138,14 +138,6 @@ const JpyForm = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
         />
       </FormControl>
 
-      <FormControl hidden>
-        <Input
-          type="text"
-          id="userEmail"
-          {...register("userEmail", { required: true })}
-        />
-      </FormControl>
-
       {status === "unauthenticated" ? (
         <div className="mt-2">
           <a

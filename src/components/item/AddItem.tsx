@@ -12,23 +12,26 @@ import {
   Select,
   chakra,
 } from "@chakra-ui/react";
-import { NATIONAL } from "@/zustand/national";
+import { NATIONAL, useNational } from "@/zustand/national";
 import { ItemFormData } from "@/ts/Item";
 import { useAddItemForm } from "@/features/hook/useAddItemForm";
 import { addItemDrawerStore } from "@/zustand/addItemDrawerStore";
 import { SubmitHandler } from "react-hook-form";
 import { CurrencyObj } from "@/ts/Currency";
+import { userEmailStore } from "@/zustand/userEmailStore";
 
 const AddItem = ({
   currencyObjData,
 }: {
   currencyObjData: CurrencyObj;
-}) => {
+  }) => {
+  const { currentNational } = useNational();
+  const { userEmail } = userEmailStore();
   const { onItemDrawerClose } = addItemDrawerStore();
   const {
     register,
     handleSubmit,
-    watch,
+    // watch,
     setValue,
     reset,
     queryClient,
@@ -36,17 +39,18 @@ const AddItem = ({
     Addmutation,
   } = useAddItemForm();
   const toast = useToast();
-  const currencyCode = watch("currencyCode");
+  // const currencyCode = watch("currencyCode");
 
   useEffect(() => {
-    if (currencyObjData[currencyCode]) {
-      const computedRate = currencyObjData[currencyCode].rate;
-      const computedInverseRate = currencyObjData[currencyCode].inverseRate;
+    if (currencyObjData[currentNational]) {
+      const computedRate = currencyObjData[currentNational].rate;
+      const computedInverseRate = currencyObjData[currentNational].inverseRate;
 
       setValue("rate", Number(computedRate.toFixed(2)));
       setValue("inverseRate", Number(computedInverseRate.toFixed(2)));
+      setValue("userEmail", userEmail);
     }
-  }, [currencyCode, currencyObjData, setValue]);
+  }, [currentNational, currencyObjData, userEmail, setValue]);
 
   const onSubmit: SubmitHandler<ItemFormData> = async (data: ItemFormData) => {
     Addmutation.mutate(data, {
@@ -84,9 +88,15 @@ const AddItem = ({
             />
           </FormControl>
 
-          <FormControl>
+          <FormControl hidden>
             <FormLabel>国</FormLabel>
-            <Select {...register("currencyCode", { required: true })}>
+            <Input
+              type="hidden"
+              id="currencyCode"
+              {...register("currencyCode", { required: true })}
+              value={currentNational}
+            />
+            {/* <Select {...register("currencyCode", { required: true })}>
               <option key="firstoption" value={""}>
                 ナショナルを下記より選択してください
               </option>
@@ -95,7 +105,7 @@ const AddItem = ({
                   {code.toUpperCase()}
                 </option>
               ))}
-            </Select>
+            </Select> */}
           </FormControl>
 
           <FormControl hidden>
@@ -115,6 +125,14 @@ const AddItem = ({
               id="inverseRate"
               {...register("inverseRate", { required: true, valueAsNumber: true })}
               step="0.01"
+            />
+          </FormControl>
+
+          <FormControl hidden>
+            <Input
+              type="text"
+              id="userEmail"
+              {...register("userEmail", { required: true })}
             />
           </FormControl>
         </Stack>
