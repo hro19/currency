@@ -3,14 +3,16 @@ import { fetchItems } from '@/api/item/fetchItem';
 import { Button, useToast } from "@chakra-ui/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useNational } from "@/zustand/national";
+import { userEmailStore } from "@/zustand/userEmailStore";
 
 const DeliteHstoryButton = ({ historyId }: { historyId:number }) => {
     const toast = useToast();
     const { currentNational } = useNational();
+    const { userEmail } = userEmailStore();
   
       const { isSuccess, refetch } = useQuery({
-        queryKey: ["items_CurrentNational"],
-        queryFn: () => fetchItems.getCurrentNationalAll(currentNational),
+        queryKey: ["items_CurrentNational", currentNational, userEmail],
+        queryFn: () => fetchItems.getCurrentNationalAll(currentNational, userEmail),
       });
 
   const deleteMutation = useMutation({

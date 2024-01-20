@@ -24,8 +24,10 @@ import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import { Currency } from "@/ts/Currency";
 import { SubmitHandler } from "react-hook-form";
 import { useNational } from "@/zustand/national";
+import { userEmailStore } from "@/zustand/userEmailStore";
 
-const Modalpage = ({ itemId, currencyData }: { itemId:number,currencyData:Currency }) => {
+const Modalpage = ({ itemId, currencyData }: { itemId: number, currencyData: Currency }) => {
+  const { userEmail } = userEmailStore();
   const [isOpen, setIsOpen] = useState(false);
   const { register, handleSubmit, reset } =
     useForm<Omit<ItemHistory, "updated_at" | "created_at" | "id">>();
@@ -61,8 +63,8 @@ const Modalpage = ({ itemId, currencyData }: { itemId:number,currencyData:Curren
 
   const { currentNational } = useNational();
   const { isSuccess, refetch } = useQuery({
-    queryKey: ["items_CurrentNational"],
-    queryFn: () => fetchItems.getCurrentNationalAll(currentNational),
+    queryKey: ["items_CurrentNational", currentNational, userEmail],
+    queryFn: () => fetchItems.getCurrentNationalAll(currentNational, userEmail),
   });
 
   const mutation = useMutation({

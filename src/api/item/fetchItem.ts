@@ -3,7 +3,7 @@ import { National } from "@/ts/Currency";
 import Cookies from "js-cookie";
 
 export const fetchItems = {
-  getAll: async (userEmail:string) => {
+  getAll: async (userEmail: string) => {
     // console.log(useremail);
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASIC_URL}/items`, {
@@ -78,13 +78,13 @@ export const fetchItems = {
       console.error(error);
     }
   },
-  getCurrentNationalAll: async (currencyCode: National) => {
+  getCurrentNationalAll: async (currencyCode: National, userEmail:string) => {
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_BASIC_URL}/items/currency/${currencyCode}`,
         {
           headers: {
-            Useremail: "dropmoment19@gmail.com",
+            Useremail: userEmail,
           },
           cache: "no-store",
         }

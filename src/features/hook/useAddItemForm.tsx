@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { userEmailStore } from "@/zustand/userEmailStore";
 
 export const useAddItemForm = () => {
-  const { userEmail } = userEmailStore.getState();
+  const { userEmail } = userEmailStore();
 
   const { register, handleSubmit, watch, setValue, reset } = useForm<ItemFormData>();
 
@@ -17,11 +17,14 @@ export const useAddItemForm = () => {
 
   const slug = usePathname().split("/").pop();
   const { refetch } = useQuery({
-    queryKey: slug === "jpy" ? ["items", userEmail] : ["items_CurrentNational"],
+    queryKey:
+      slug === "jpy"
+        ? ["items", userEmail]
+        : ["items_CurrentNational", currentNational, userEmail],
     queryFn: () =>
       slug === "jpy"
         ? () => fetchItems.getAll(userEmail)
-        : fetchItems.getCurrentNationalAll(currentNational),
+        : () => fetchItems.getCurrentNationalAll(currentNational, userEmail),
   });
 
   const Addmutation = useMutation({

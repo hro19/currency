@@ -21,8 +21,10 @@ import { fetchItems } from "@/api/item/fetchItem";
 import { Item } from "@/ts/Item";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useNational } from "@/zustand/national";
+import { userEmailStore } from "@/zustand/userEmailStore";
 
 const EditItemButton = ({ item }: { item: Item }) => {
+  const { userEmail } = userEmailStore();
   const [isOpen, setIsOpen] = useState(false);
   const { register, handleSubmit } = useForm<
     Omit<Item, "updated_at" | "created_at" | "id">
@@ -43,8 +45,8 @@ const EditItemButton = ({ item }: { item: Item }) => {
 
   const { currentNational } = useNational();
   const { isSuccess, refetch } = useQuery({
-    queryKey: ["items_CurrentNational"],
-    queryFn: () => fetchItems.getCurrentNationalAll(currentNational),
+    queryKey: ["items_CurrentNational", currentNational, userEmail],
+    queryFn: () => fetchItems.getCurrentNationalAll(currentNational, userEmail),
   });
 
   const editMutation = useMutation({

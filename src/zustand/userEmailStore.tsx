@@ -7,5 +7,5 @@ type UserEmailStoreType = {
 
 export const userEmailStore = create<UserEmailStoreType>((set) => ({
   userEmail: "",
-  setUserEmail: (userEmail) => set({ userEmail: userEmail }),
+  setUserEmail: (email) => set({ userEmail: email }),
 }));

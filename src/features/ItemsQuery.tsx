@@ -10,12 +10,24 @@ import { useNational } from "@/zustand/national";
 import { fetchItems } from "@/api/item/fetchItem";
 import { isfilteredDataEmpty } from "@/features/filter";
 import { match } from "ts-pattern";
+import { userEmailStore } from "@/zustand/userEmailStore";
 
-const ItemsQuery = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
+const ItemsQuery = ({
+  currencyObjData,
+  userEmail,
+}: {
+  currencyObjData: CurrencyObj;
+  userEmail:string;
+}) => {
   const { currentNational } = useNational();
+  const { setUserEmail } = userEmailStore();
+  useEffect(() => {
+    setUserEmail(userEmail);
+  }, [setUserEmail, userEmail]);
+
   const { isPending, isError, data, error, refetch } = useQuery({
-    queryKey: ["items_CurrentNational"],
-    queryFn: () => fetchItems.getCurrentNationalAll(currentNational),
+    queryKey: ["items_CurrentNational", currentNational, userEmail],
+    queryFn: () => fetchItems.getCurrentNationalAll(currentNational, userEmail),
   });
   const isEmpty = isfilteredDataEmpty(data);
 
