@@ -11,9 +11,13 @@ import {
 import { GetApiCurency } from "@/api/currency/getApiCurrency";
 import ItemsQuery from "@/features/ItemsQuery";
 import DrawerItem from "@/components/item/DrawerItem";
+import { getAuthSession } from "@/lib/next-auth/getAuthSession";
 
 export default async function Page() {
     const currencyObjData: Awaited<CurrencyObj> = await GetApiCurency("jpy");
+  
+    const session = await getAuthSession();
+    const userEmail = session?.user?.email || "";
     
     return (
       <Box>
@@ -28,7 +32,7 @@ export default async function Page() {
           <Heading as={"h1"} className="my-4 ml-2 text-2xl font-bold text-blue-500">
             テスト開発【item】
           </Heading>
-          <ItemsQuery currencyObjData={currencyObjData} />
+          <ItemsQuery currencyObjData={currencyObjData} userEmail={userEmail} />
         </Container>
       </Box>
     );
