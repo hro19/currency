@@ -9,7 +9,6 @@ import { Box } from "@chakra-ui/react";
 import JpyTable from "@/components/currency/JpyTable";
 import { getAuthSession } from "@/lib/next-auth/getAuthSession";
 
-
 const UsersList = async () => {
   const currencyObjData: Awaited<CurrencyObj> = await GetApiCurency("jpy");
 

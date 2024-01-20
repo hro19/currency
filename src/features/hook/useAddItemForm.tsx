@@ -4,20 +4,24 @@ import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import { ItemFormData } from "@/ts/Item";
 import { useNational } from "@/zustand/national";
 import { usePathname } from "next/navigation";
+import { getAuthSession } from "@/lib/next-auth/getAuthSession";
 
-export const useAddItemForm = () => {
+export const useAddItemForm = async () => {
+  const session = await getAuthSession();
+  const userEmail = session?.user?.email || "";
+
   const { register, handleSubmit, watch, setValue, reset } = useForm<ItemFormData>();
 
   const queryClient = useQueryClient();
 
   const { currentNational } = useNational();
 
-  const slug = usePathname().split("/").pop(); 
+  const slug = usePathname().split("/").pop();
   const { refetch } = useQuery({
-    queryKey: slug === "jpy" ? ["items"] : ["items_CurrentNational"],
+    queryKey: slug === "jpy" ? ["items", userEmail] : ["items_CurrentNational"],
     queryFn: () =>
       slug === "jpy"
-        ? fetchItems.getAll()
+        ? () => fetchItems.getAll(userEmail)
         : fetchItems.getCurrentNationalAll(currentNational),
   });
 
