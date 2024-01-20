@@ -15,8 +15,8 @@ const JpyTable = ({ userEmail }: { userEmail:string }) => {
   // console.log(userEmail);
 
   const { isPending, isError, data, error } = useQuery({
-    queryKey: ["items"],
-    queryFn: fetchItems.getAll,
+    queryKey: ["items", userEmail],
+    queryFn: () => fetchItems.getAll(userEmail),
   });
 
   if (isPending) {

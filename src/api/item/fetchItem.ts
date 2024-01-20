@@ -3,13 +3,12 @@ import { National } from "@/ts/Currency";
 import Cookies from "js-cookie";
 
 export const fetchItems = {
-  getAll: async () => {
-    const useremail: string = Cookies.get("userEmail") || "";
+  getAll: async (userEmail:string) => {
     // console.log(useremail);
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASIC_URL}/items`, {
         headers: {
-          Useremail: useremail,
+          Useremail: userEmail,
         },
         cache: "no-store",
       });
