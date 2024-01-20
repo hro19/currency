@@ -4,11 +4,10 @@ import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import { ItemFormData } from "@/ts/Item";
 import { useNational } from "@/zustand/national";
 import { usePathname } from "next/navigation";
-import { getAuthSession } from "@/lib/next-auth/getAuthSession";
+import { userEmailStore } from "@/zustand/userEmailStore";
 
-export const useAddItemForm = async () => {
-  const session = await getAuthSession();
-  const userEmail = session?.user?.email || "";
+export const useAddItemForm = () => {
+  const { userEmail } = userEmailStore.getState();
 
   const { register, handleSubmit, watch, setValue, reset } = useForm<ItemFormData>();
 

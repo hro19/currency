@@ -18,7 +18,7 @@ import { NATIONAL_i18n } from "@/zustand/national";
 import { SubmitHandler } from "react-hook-form";
 import { useSession } from "next-auth/react";
 
-const JpyForm = async({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
+const JpyForm = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
   const {
     register,
     handleSubmit,
@@ -28,7 +28,7 @@ const JpyForm = async({ currencyObjData }: { currencyObjData: CurrencyObj }) => 
     queryClient,
     refetch,
     Addmutation,
-  } = await useAddItemForm();
+  } = useAddItemForm();
 
   const { currentNational } = useNational();
   const { setInputPrice } = inputPriceStore();
