@@ -9,4 +9,9 @@ export const options = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
     }),
   ],
+  callbacks: {
+    async redirect({ url, baseUrl }) {
+      return `${baseUrl}/currency/jpy`;
+    },
+  },
 } satisfies NextAuthOptions;
