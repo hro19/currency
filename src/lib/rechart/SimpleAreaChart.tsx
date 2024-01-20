@@ -25,8 +25,8 @@ export default function Recharts({ graphData, currencyName, currencyLineColor, j
         angle={45}
         tick={(props) => (
           <text
-            x={props.x - 20} // x座標
-            y={props.y + 10} // y座標
+            x={props.x - 30} // x座標
+            y={props.y + 20} // y座標
             textAnchor="start" // アンカーポイントの設定（"start" または "end" で右寄せのラベルに設定）
             fontSize={16} // フォントサイズ
             fill="#fff" // フォントの色
