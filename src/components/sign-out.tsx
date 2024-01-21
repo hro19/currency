@@ -6,7 +6,7 @@ export const SignOut = ({
   ...props
 }: React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (
-    <button {...props} onClick={() => signOut()}>
+    <button {...props} onClick={() => signOut({ callbackUrl: "/" })}>
       {children}
     </button>
   );
