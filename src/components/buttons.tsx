@@ -7,7 +7,7 @@ import { Button } from "@chakra-ui/react";
 // ログインボタン
 export const LoginButton = () => {
   return (
-    <Button className="bg-slate-200" size="sm" onClick={() => signIn()}>
+    <Button className="bg-slate-200" size="sm" onClick={() => signIn('google', { callbackUrl: '/currency/jpy' })}>
       <User size={16} />
     </Button>
   );

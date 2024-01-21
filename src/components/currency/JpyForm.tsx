@@ -17,6 +17,7 @@ import { ItemFormData } from "@/ts/Item";
 import { NATIONAL_i18n } from "@/zustand/national";
 import { SubmitHandler } from "react-hook-form";
 import { useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 
 const JpyForm = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
   const {
@@ -140,14 +141,17 @@ const JpyForm = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
 
       {status === "unauthenticated" ? (
         <div className="mt-2">
-          <a
-            className={
-              " rounded-md bg-indigo-600 px-4 py-2 font-bold text-white hover:bg-indigo-400"
+          <Button
+            type="submit"
+            className={"bg-indigo-600 hover:bg-indigo-400"}
+            color={"white"}
+            fontSize="lg"
+            onClick={() =>
+              signIn("google", { callbackUrl: "/currency/jpy" })
             }
-            href="/currency/jpy"
           >
             ログインする
-          </a>
+          </Button>
         </div>
       ) : (
         <Button
