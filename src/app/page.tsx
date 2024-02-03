@@ -5,10 +5,7 @@ import { GetApiCurency } from "@/api/currency/getApiCurrency";
 import SelectNational from "@/app/currency/php/SelectNational";
 import HeaderTitle from "@/components/common/HeaderTitle";
 import { Box, Heading, Text } from "@chakra-ui/react";
-import ItemAnalysis from "@/components/top/ItemAnalysis";
-import { gapaoData } from "@/lib/rechart/gapao";
-import { cinemaData } from "@/lib/rechart/cinema";
-import {potetochipData} from "@/lib/rechart/potetochip";
+import PastItems from "@/components/top/PastItems";
 
 const Home = async () => {
   const currencyObjData: Awaited<CurrencyObj> = await GetApiCurency("jpy");
@@ -29,38 +26,7 @@ const Home = async () => {
           過去のデータと比較してみて、過去との価格差を見比べてみましょう。
         </Text>
       </Box>
-      <Box>
-        <ItemAnalysis
-          bgColor={"bg-gray-800"}
-          countryFlag={"thb"}
-          itemName={"ガパオライス（1皿）"}
-          itemPicture={"food_gapao_rice"}
-          graphData={gapaoData}
-          currencyName={"タイバーツ"}
-          currencyLineColor={"#8884d8"}
-          jpyLineColor={"#82ca9d"}
-        />
-        <ItemAnalysis
-          bgColor={"bg-gray-400"}
-          countryFlag={"krw"}
-          itemName={"映画チケット（1枚）"}
-          itemPicture={"building_cinema"}
-          graphData={cinemaData}
-          currencyName={"韓国ウォン"}
-          currencyLineColor={"#2a5996"}
-          jpyLineColor={"#229120"}
-        />
-        <ItemAnalysis
-          bgColor={"bg-gray-700"}
-          countryFlag={"php"}
-          itemName={"ポテトチップス（1袋:80g）"}
-          itemPicture={"gomi_potatochips_fukuro"}
-          graphData={potetochipData}
-          currencyName={"フィリピンペソ"}
-          currencyLineColor={"#8884d8"}
-          jpyLineColor={"#82ca9d"}
-        />
-      </Box>
+      <PastItems/>
     </>
   );
 };
