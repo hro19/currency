@@ -15,6 +15,8 @@ import {
   ModalBody,
   ModalCloseButton,
   Box,
+  InputGroup,
+  InputRightAddon,
   useToast,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
@@ -101,11 +103,14 @@ const Modalpage = ({ itemId, currencyData }: { itemId: number, currencyData: Cur
               <Stack spacing={6}>
                 <FormControl display="block">
                   <FormLabel>Price:</FormLabel>
-                  <Input
-                    type="number"
-                    id="price"
-                    {...register("price", { required: true, valueAsNumber: true })}
-                  />
+                  <InputGroup>
+                    <Input
+                      type="number"
+                      id="price"
+                      {...register("price", { required: true, valueAsNumber: true })}
+                    />
+                    <InputRightAddon>{currencyData.code}</InputRightAddon>
+                  </InputGroup>
                 </FormControl>
 
                 <FormControl hidden>
