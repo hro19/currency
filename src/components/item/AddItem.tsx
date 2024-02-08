@@ -10,6 +10,8 @@ import {
   Input,
   Button,
   Select,
+  InputGroup,
+  InputRightAddon,
   chakra,
 } from "@chakra-ui/react";
 import { NATIONAL, useNational } from "@/zustand/national";
@@ -81,11 +83,14 @@ const AddItem = ({
 
           <FormControl>
             <FormLabel>現地価格</FormLabel>
-            <Input
-              type="number"
-              id="price"
-              {...register("price", { required: true, valueAsNumber: true })}
-            />
+            <InputGroup>
+              <Input
+                type="number"
+                id="price"
+                {...register("price", { required: true, valueAsNumber: true })}
+              />
+              <InputRightAddon>{currencyObjData[currentNational].code}</InputRightAddon>
+            </InputGroup>
           </FormControl>
 
           <FormControl hidden>
