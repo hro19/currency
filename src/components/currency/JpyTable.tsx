@@ -10,6 +10,7 @@ import { NATIONAL_i18n } from "@/zustand/national";
 import { National } from "@/ts/Currency";
 import Image from "next/image";
 import { fetchItems } from "@/api/item/fetchItem";
+import ItemDelete from "./ItemDelete";
 
 const JpyTable = ({ userEmail }: { userEmail:string }) => {
   // console.log(userEmail);
@@ -53,6 +54,7 @@ const JpyTable = ({ userEmail }: { userEmail:string }) => {
             <Th px={4} py={2}>
               日本円価格
             </Th>
+            <Th px={4} py={2}></Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -87,6 +89,9 @@ const JpyTable = ({ userEmail }: { userEmail:string }) => {
                   {(item.histories[0].price * item.histories[0].inverseRate).toFixed(0)}
                 </chakra.strong>
                 <chakra.span className="pl-1 text-xs">円</chakra.span>
+              </Td>
+              <Td px={4} py={2}>
+                <ItemDelete item={item} />
               </Td>
             </Tr>
           ))}

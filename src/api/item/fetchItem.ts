@@ -78,6 +78,16 @@ export const fetchItems = {
       console.error(error);
     }
   },
+  deleteItem: async (itemId: number) => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASIC_URL}/items/${itemId}`,
+      {
+        method: "DELETE",
+      }
+    );
+    const data = await response.json();
+    return data;
+  },
   getCurrentNationalAll: async (currencyCode: National, userEmail:string) => {
     try {
       const response = await fetch(
