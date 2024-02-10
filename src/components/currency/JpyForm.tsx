@@ -93,6 +93,7 @@ const JpyForm = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
             type="text"
             id="price"
             {...register("price", { required: true, valueAsNumber: true })}
+            step="0.0001"
             placeholder="商品現地価格"
             className="my-4 rounded-l-lg border border-gray-300 bg-white px-3 py-2 text-2xl focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
@@ -146,9 +147,7 @@ const JpyForm = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
             className={"bg-indigo-600 hover:bg-indigo-400"}
             color={"white"}
             fontSize="lg"
-            onClick={() =>
-              signIn("google", { callbackUrl: "/currency/jpy" })
-            }
+            onClick={() => signIn("google", { callbackUrl: "/currency/jpy" })}
           >
             ログインする
           </Button>

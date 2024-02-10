@@ -102,12 +102,13 @@ const Modalpage = ({ itemId, currencyData }: { itemId: number, currencyData: Cur
             >
               <Stack spacing={6}>
                 <FormControl display="block">
-                  <FormLabel>Price:</FormLabel>
+                  <FormLabel>現在の価格</FormLabel>
                   <InputGroup>
                     <Input
                       type="number"
                       id="price"
                       {...register("price", { required: true, valueAsNumber: true })}
+                      step="0.0001"
                     />
                     <InputRightAddon>{currencyData.code}</InputRightAddon>
                   </InputGroup>

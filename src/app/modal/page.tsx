@@ -37,6 +37,7 @@ const Modalpage = () => {
                   <Input
                     id="price"
                     {...register("price", { required: true, valueAsNumber: true })}
+                    step="0.0001"
                   />
                   <FormErrorMessage>
                     {errors.price && (errors.price.message as string)}

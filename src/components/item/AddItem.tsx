@@ -88,6 +88,7 @@ const AddItem = ({
                 type="number"
                 id="price"
                 {...register("price", { required: true, valueAsNumber: true })}
+                step="0.0001"
               />
               <InputRightAddon>{currencyObjData[currentNational].code}</InputRightAddon>
             </InputGroup>
