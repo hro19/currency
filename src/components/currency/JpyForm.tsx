@@ -26,6 +26,7 @@ const JpyForm = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
     watch,
     setValue,
     reset,
+    formState: { errors },
     queryClient,
     refetch,
     Addmutation,
@@ -84,6 +85,7 @@ const JpyForm = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
             placeholder="商品名"
             className="my-4 rounded-lg border border-gray-300 bg-white px-3 py-2 text-2xl focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
+          {errors.name && <p className="text-red-600">{errors.name.message}</p>}
         </FormControl>
       )}
 
@@ -101,6 +103,7 @@ const JpyForm = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
             {NATIONAL_i18n[currentNational].currencyName.ja}
           </InputRightAddon>
         </InputGroup>
+        {errors.price && <p className="text-red-600">{errors.price.message}</p>}
       </FormControl>
 
       <FormControl id="currencyCode" hidden>
