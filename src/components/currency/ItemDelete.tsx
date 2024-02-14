@@ -6,25 +6,16 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverBody,
-  PopoverFooter,
   PopoverArrow,
   PopoverCloseButton,
-  PopoverAnchor,
   useDisclosure
 } from "@chakra-ui/react";
 import React from 'react'
-import { Button } from "../ui/button";
 import { Item } from "@/ts/Item";
-import { fetchItems } from "@/api/item/fetchItem";
+import DeliteItemButton from "@/components/currency/DeliteItemButton"
 
 const ItemDelete = ({ item }: { item: Item }) => {
-
-    const { onOpen, onClose, isOpen } = useDisclosure();
-    
-    const handlerDelete = async(item:Item) => {
-      await fetchItems.deleteItem(item.id);
-      onClose();
-    };
+  const { onOpen, onClose, isOpen } = useDisclosure();
 
   return (
     <>
@@ -48,14 +39,7 @@ const ItemDelete = ({ item }: { item: Item }) => {
           <PopoverCloseButton bg="purple.500" />
           <PopoverBody>
             <Box as="p">「{item.name}」を削除しますか？</Box>
-            <Button
-              className="my-2 bg-gray-400"
-              onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
-                handlerDelete(item)
-              }
-            >
-              削除する
-            </Button>
+            <DeliteItemButton item={item} />
           </PopoverBody>
         </PopoverContent>
       </Popover>
