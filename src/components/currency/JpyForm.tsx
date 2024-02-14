@@ -18,6 +18,7 @@ import { NATIONAL_i18n } from "@/zustand/national";
 import { SubmitHandler } from "react-hook-form";
 import { useSession } from "next-auth/react";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const JpyForm = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
   const {
@@ -37,6 +38,7 @@ const JpyForm = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
   const toast = useToast();
   const price = watch("price");
   const { data: session, status } = useSession();
+  const router = useRouter();
   // console.log(session?.user?.email);
 
   useEffect(() => {
@@ -69,7 +71,8 @@ const JpyForm = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
           isClosable: true,
           position: "bottom",
         });
-        console.log(data);
+        router.push("/currency/jpy", { scroll: false });
+        // console.log(data);
       },
     });
   };

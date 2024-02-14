@@ -1,16 +1,20 @@
 import { z } from "zod";
-
-export const nameSchema = z.object({
-  name: z.string().min(1, { message: "1文字以上を入力してください" }),
-});
-
-export const priceSchema = z.object({
-  price: z.number().min(0.0001, { message: "0.0001以上を入力してください" }),
-});
+import {
+  nameSchema,
+  priceSchema,
+  currencyCodeSchema,
+  rateSchema,
+  inverseRateSchema,
+  userEmailSchema,
+} from "./field";
 
 export const itemSchema = z.object({
   ...nameSchema.shape,
   ...priceSchema.shape,
+  ...currencyCodeSchema.shape,
+  ...rateSchema.shape,
+  ...inverseRateSchema.shape,
+  ...userEmailSchema.shape,
 });
 
 export type TypeitemSchema = z.infer<typeof itemSchema>;
