@@ -11,13 +11,16 @@ import { National } from "@/ts/Currency";
 import Image from "next/image";
 import { fetchItems } from "@/api/item/fetchItem";
 import ItemDelete from "./ItemDelete";
+import { useSession } from "next-auth/react";
 
-const JpyTable = ({ userEmail }: { userEmail:string }) => {
-  // console.log(userEmail);
+const JpyTable = () => {
+  const { data: session } = useSession();
+  const userEmail:string | null | undefined = session?.user?.email;
 
   const { isPending, isError, data, error } = useQuery({
     queryKey: ["items", userEmail],
-    queryFn: () => fetchItems.getAll(userEmail),
+    queryFn: () => fetchItems.getAll(userEmail || ""),
+    enabled: typeof userEmail === "string",
   });
 
   if (isPending) {
