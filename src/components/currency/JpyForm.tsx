@@ -83,7 +83,7 @@ const JpyForm = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
             id="name"
             {...register("name", { required: true })}
             placeholder="商品名"
-            className="my-4 rounded-lg border border-gray-300 bg-white px-3 py-2 text-2xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="mt-4 rounded-lg border border-gray-300 bg-white px-3 py-2 text-2xl focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           {errors.name && <p className="text-red-600">{errors.name.message}</p>}
         </FormControl>
@@ -97,9 +97,9 @@ const JpyForm = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
             {...register("price", { required: true, valueAsNumber: true })}
             step="0.0001"
             placeholder="商品現地価格"
-            className="my-4 rounded-l-lg border border-gray-300 bg-white px-3 py-2 text-2xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="mt-6  rounded-l-lg border border-gray-300 bg-white px-3 py-2 text-2xl focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <InputRightAddon className="my-4">
+          <InputRightAddon className="mt-6">
             {NATIONAL_i18n[currentNational].currencyName.ja}
           </InputRightAddon>
         </InputGroup>
@@ -158,7 +158,7 @@ const JpyForm = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
       ) : (
         <Button
           type="submit"
-          className={"bg-indigo-600 hover:bg-indigo-400"}
+          className={"mt-6 bg-indigo-600 hover:bg-indigo-400"}
           color={"white"}
           fontSize="lg"
           onClick={handleSubmit(onSubmit)}

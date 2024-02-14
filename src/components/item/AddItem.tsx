@@ -33,9 +33,10 @@ const AddItem = ({
   const {
     register,
     handleSubmit,
-    // watch,
+    watch,
     setValue,
     reset,
+    formState: { errors },
     queryClient,
     refetch,
     Addmutation,
@@ -79,6 +80,7 @@ const AddItem = ({
           <FormControl>
             <FormLabel>商品名</FormLabel>
             <Input type="text" id="name" {...register("name", { required: true })} />
+            {errors.name && <p className="text-red-600">{errors.name.message}</p>}
           </FormControl>
 
           <FormControl>
@@ -92,6 +94,7 @@ const AddItem = ({
               />
               <InputRightAddon>{currencyObjData[currentNational].code}</InputRightAddon>
             </InputGroup>
+            {errors.price && <p className="text-red-600">{errors.price.message}</p>}
           </FormControl>
 
           <FormControl hidden>
