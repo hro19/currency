@@ -17,6 +17,8 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { nameSchema } from "@/zod/itemSchema";
 import { fetchItems } from "@/api/item/fetchItem";
 import { Item } from "@/ts/Item";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -26,12 +28,15 @@ import { userEmailStore } from "@/zustand/userEmailStore";
 const EditItemButton = ({ item }: { item: Item }) => {
   const { userEmail } = userEmailStore();
   const [isOpen, setIsOpen] = useState(false);
-  const { register, handleSubmit } = useForm<
-    Omit<Item, "updated_at" | "created_at" | "id">
-  >({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Omit<Item, "updated_at" | "created_at" | "id">>({
     defaultValues: {
       name: item.name,
     } as unknown as Pick<Item, "name">,
+    resolver: zodResolver(nameSchema)
   });
   const toast = useToast();
 
@@ -97,6 +102,7 @@ const EditItemButton = ({ item }: { item: Item }) => {
                 <FormControl>
                   <FormLabel>商品名</FormLabel>
                   <Input type="text" {...register("name")} />
+                  {errors.name && <p className="text-red-600">{errors.name.message}</p>}
                 </FormControl>
               </Stack>
             </form>

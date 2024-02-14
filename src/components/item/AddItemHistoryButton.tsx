@@ -20,6 +20,8 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { historySchema, TypehistorySchema } from "@/zod/historySchema";
 import { fetchItems } from "@/api/item/fetchItem";
 import { ItemHistory } from "@/ts/Item";
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
@@ -31,8 +33,14 @@ import { userEmailStore } from "@/zustand/userEmailStore";
 const Modalpage = ({ itemId, currencyData }: { itemId: number, currencyData: Currency }) => {
   const { userEmail } = userEmailStore();
   const [isOpen, setIsOpen] = useState(false);
-  const { register, handleSubmit, reset } =
-    useForm<Omit<ItemHistory, "updated_at" | "created_at" | "id">>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<Omit<ItemHistory, "updated_at" | "created_at" | "id">>({
+    resolver: zodResolver(historySchema),
+  });
   const toast = useToast();
 
   const handleOpen = () => {
@@ -70,7 +78,9 @@ const Modalpage = ({ itemId, currencyData }: { itemId: number, currencyData: Cur
   });
 
   const mutation = useMutation({
-    mutationFn: fetchItems.addHistory,
+    mutationFn: (data: TypehistorySchema) => {
+      return fetchItems.addHistory(data);
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["items"] });
       refetch();
@@ -112,6 +122,7 @@ const Modalpage = ({ itemId, currencyData }: { itemId: number, currencyData: Cur
                     />
                     <InputRightAddon>{currencyData.code}</InputRightAddon>
                   </InputGroup>
+                  {errors.price && <p className="text-red-600">{errors.price.message}</p>}
                 </FormControl>
 
                 <FormControl hidden>
@@ -129,7 +140,7 @@ const Modalpage = ({ itemId, currencyData }: { itemId: number, currencyData: Cur
                   <Input
                     type="number"
                     id="rate"
-                    step="0.01"
+                    step="0.0001"
                     {...register("rate", { required: true, valueAsNumber: true })}
                     value={currencyData.rate}
                   />
@@ -140,7 +151,7 @@ const Modalpage = ({ itemId, currencyData }: { itemId: number, currencyData: Cur
                   <Input
                     type="number"
                     id="inverseRate"
-                    step="0.01"
+                    step="0.0001"
                     {...register("inverseRate", { required: true, valueAsNumber: true })}
                     value={currencyData.inverseRate}
                   />
