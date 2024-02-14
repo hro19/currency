@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { nameSchema } from "@/zod/itemSchema";
+import { nameSchema } from "@/zod/field";
 import { fetchItems } from "@/api/item/fetchItem";
 import { Item } from "@/ts/Item";
 import { useMutation, useQuery } from "@tanstack/react-query";
