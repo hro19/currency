@@ -86,7 +86,8 @@ const JpyForm = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
             id="name"
             {...register("name", { required: true })}
             placeholder="商品名"
-            className="mt-4 rounded-lg border border-gray-300 bg-white px-3 py-2 text-2xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+            fontSize={{ base: "md", md: "2xl" }}
+            className="mt-4 rounded-lg border border-gray-300 bg-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           {errors.name && <p className="text-red-600">{errors.name.message}</p>}
         </FormControl>
@@ -100,9 +101,10 @@ const JpyForm = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
             {...register("price", { required: true, valueAsNumber: true })}
             step="0.0001"
             placeholder="商品現地価格"
-            className="mt-6  rounded-l-lg border border-gray-300 bg-white px-3 py-2 text-2xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+            fontSize={{ base: "md", md: "2xl" }}
+            className="mt-6  rounded-l-lg border border-gray-300 bg-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <InputRightAddon className="mt-6">
+          <InputRightAddon fontSize={{ base: "smaller", md: "md" }} className="mt-6">
             {NATIONAL_i18n[currentNational].currencyName.ja}
           </InputRightAddon>
         </InputGroup>

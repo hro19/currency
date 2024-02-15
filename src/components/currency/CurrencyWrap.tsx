@@ -6,7 +6,7 @@ import Image from "next/image";
 import { dateFormatter } from "@/utils/dateFns";
 import { NATIONAL_i18n, useNational } from "@/zustand/national";
 import { inputPriceStore } from "@/zustand/inputPriceStore";
-import { chakra, AspectRatio, Flex, Box, Text } from "@chakra-ui/react";
+import { chakra, AspectRatio, Flex, Box, Text, Heading } from "@chakra-ui/react";
 import JpyForm from "@/components/currency/JpyForm";
 
 const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
@@ -31,14 +31,14 @@ const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => 
             </AspectRatio>
           </chakra.i>
           <Box as={"section"} className="text-center">
-            <chakra.h3 className="text-lg font-bold">
+            <Heading as="h2" size={{ base: "sm", md: "md" }} className="font-bold">
               {NATIONAL_i18n[currentNational].name.ja}のレート
               <br />
               {currencyObjData[currentNational].inverseRate.toFixed(2)}円
               <chakra.span className="text-sm">
                 (/{NATIONAL_i18n[currentNational].currencyName.ja})
               </chakra.span>
-            </chakra.h3>
+            </Heading>
             <chakra.span className="block text-xs">
               更新日（{dateFormatter.zi(currencyObjData[currentNational].date)}）
             </chakra.span>

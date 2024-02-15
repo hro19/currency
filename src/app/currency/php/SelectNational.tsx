@@ -11,12 +11,17 @@ const SelectNational = () => {
   
   return (
     <>
-      <Stack spacing={8} px={5} direction="row" alignItems="center">
+      <Stack
+        spacing={{ base: 4, md: 8 }}
+        px={5}
+        direction="row"
+        alignItems="center"
+      >
         <Box>
           <Select
             variant="filled"
             _hover={{ bg: "pink.200" }}
-            fontSize="lg"
+            fontSize={{ base: "md", md: "xl" }}
             className="bg-pink-400"
             value={currentNational}
             onChange={(event) => setCurrentNational(event.target.value as National)}
@@ -29,7 +34,7 @@ const SelectNational = () => {
           </Select>
         </Box>
         <Box>
-          <Heading fontSize="xl">
+          <Heading fontSize={{ base: "sm", md: "xl" }}>
             選択された国：{NATIONAL_i18n[currentNational].name.ja}
           </Heading>
         </Box>

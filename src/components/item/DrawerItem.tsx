@@ -29,7 +29,7 @@ function DrawerExample({ currencyObjData }: { currencyObjData: CurrencyObj }) {
         border="2px"
         borderColor="orange.500"
         _hover={{ bg: "orange.100" }}
-        fontSize="lg"
+        fontSize={{ base: "sm", md: "lg" }}
       >
         アイテム新規作成
       </Button>
