@@ -6,7 +6,7 @@ import Image from "next/image";
 import { dateFormatter } from "@/utils/dateFns";
 import { NATIONAL_i18n, useNational } from "@/zustand/national";
 import { inputPriceStore } from "@/zustand/inputPriceStore";
-import { chakra, Flex, Box, Text } from "@chakra-ui/react";
+import { chakra, AspectRatio, Flex, Box, Text } from "@chakra-ui/react";
 import JpyForm from "@/components/currency/JpyForm";
 
 const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => {
@@ -20,13 +20,15 @@ const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => 
       <Flex maxW="860px" mx={"auto"} mt={3}>
         <Box bg={"cyan.100"} px={4} py={12} w={"100%"} className="relative">
           <chakra.i className="absolute left-2 top-3">
-            <Image
-              src={`/country/${currentNational}.png`}
-              alt="交換元通貨のフラグ"
-              width={80}
-              height={55}
-              priority
-            />
+            <AspectRatio width={{ base: "50px", md: "70px" }} ratio={4 / 3}>
+              <Image
+                src={`/country/${currentNational}.png`}
+                alt="交換元通貨のフラグ"
+                sizes="100%"
+                fill
+                priority
+              />
+            </AspectRatio>
           </chakra.i>
           <Box as={"section"} className="text-center">
             <chakra.h3 className="text-lg font-bold">
@@ -45,13 +47,15 @@ const CurrencyWrap = ({ currencyObjData }: { currencyObjData: CurrencyObj }) => 
         </Box>
         <Box bg={"green.200"} px={4} py={12} w={"100%"} className="relative">
           <chakra.i className="absolute left-2 top-3">
-            <Image
-              src="/country/jpy.png"
-              alt="交換目的通貨のフラグ"
-              width={80}
-              height={55}
-              priority
-            />
+            <AspectRatio width={{ base: "50px", md: "70px" }} ratio={4 / 3}>
+              <Image
+                src="/country/jpy.png"
+                alt="交換目的通貨のフラグ"
+                sizes="100%"
+                fill
+                priority
+              />
+            </AspectRatio>
           </chakra.i>
           <Box className="grid h-full place-content-center place-items-center">
             <chakra.h3 className="mb-3">両替時の日本円</chakra.h3>

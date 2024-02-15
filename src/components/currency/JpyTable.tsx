@@ -2,7 +2,19 @@
 
 import React from "react";
 
-import { chakra,Box, Table, Thead, Tbody, Tr, Th, Td, Stack, Skeleton } from "@chakra-ui/react";
+import {
+  chakra,
+  AspectRatio,
+  Box,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  Stack,
+  Skeleton,
+} from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import { Item } from "@/ts/Item";
 import { dateFormatter } from "@/utils/dateFns";
@@ -67,13 +79,14 @@ const JpyTable = () => {
                 {item.name}
               </Td>
               <Td px={4} py={2}>
-                <Image
-                  src={`/country/${item.currencyCode}.png`}
-                  alt="交換元通貨のフラグ"
-                  width={22}
-                  height={15}
-                  priority
-                />
+                <AspectRatio maxW="28px" ratio={4 / 3}>
+                  <Image
+                    src={`/country/${item.currencyCode}.png`}
+                    alt="交換元通貨のフラグ"
+                    sizes="100%"
+                    fill
+                  />
+                </AspectRatio>
               </Td>
               <Td px={4} py={2} fontSize={"sm"}>
                 {dateFormatter.funJap(item.created_at as unknown as string)}

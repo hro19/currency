@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from "next/image";
 import SimpleAreaChart from "@/lib/rechart/SimpleAreaChart";
+import { AspectRatio } from '@chakra-ui/react';
 
 
 interface ItemAnalysisProps {
@@ -28,14 +29,17 @@ const ItemAnalysis: React.FC<ItemAnalysisProps> = ({
     <section className={`dark: py-2 ${bgColor} dark:text-gray-100`}>
       <div className="container mx-auto flex flex-col lg:flex-row lg:justify-center">
         <div className="flex flex-col items-center justify-center justify-items-center lg:items-end">
-          <Image
-            src={`/country/${countryFlag}.png`}
-            alt="国旗"
-            width="90"
-            height="60"
-            className="my-4"
-          />
-          <Image src={`/items/${itemPicture}.png`} alt="写真" width="200" height="150" />
+          <AspectRatio width={"70px"} ratio={4 / 3}>
+            <Image
+              src={`/country/${countryFlag}.png`}
+              alt="国旗"
+              sizes="100%"
+              fill
+            />
+          </AspectRatio>
+          <AspectRatio width={"200px"} ratio={4 / 4} mt={2}>
+            <Image src={`/items/${itemPicture}.png`} alt="写真" sizes="100%" fill />
+          </AspectRatio>
           <h2 className="text-xl">{itemName}</h2>
         </div>
         <div className="flex flex-col p-6 md:p-8 lg:p-12">
