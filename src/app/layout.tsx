@@ -1,11 +1,15 @@
 import './globals.css';
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Noto_Sans_JP } from "next/font/google";
 import { Providers } from "./providers";
 import GlobalMenu from '@/components/common/GlobalMenu';
 import { HeadUser } from "@/components/HeadUser";
 
-const inter = Inter({ subsets: ['latin'] })
+const noto = Noto_Sans_JP({
+  weight: ["400", "700"],
+  style: "normal",
+  subsets: ["latin"],
+ });
 
 export const metadata: Metadata = {
   title: '通貨両替',
@@ -19,7 +23,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={noto.className}>
         <Providers>
           <HeadUser />
           <GlobalMenu />
